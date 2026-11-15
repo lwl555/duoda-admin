@@ -91,7 +91,10 @@
   #gate p.sub { font-size: 12px; color: var(--ink-3); margin: 0 0 18px; }
   #gate label { margin-top: 12px; }
   #gate button.primary { width: 100%; margin-top: 18px; }
-  #gateError { color: var(--red); font-size: 12px; margin-top: 10px; min-height: 16px; }
+  #gateError { color: var(--red); font-size: 12px; margin-top: 10px; min-height: 16px; line-height: 1.6; }
+  #gate label.showpass { display: flex; align-items: center; gap: 6px; font-size: 12px;
+    color: var(--ink-3); margin-top: 10px; cursor: pointer; }
+  #gate label.showpass input { width: auto; margin: 0; accent-color: var(--blue); }
   details summary { cursor: pointer; color: var(--blue); font-size: 13px; }
   pre { white-space: pre-wrap; word-break: break-all; margin: 6px 0 0; font-size: 12px; }
 </style>
@@ -110,7 +113,8 @@
     <label>账号</label>
     <input id="gateUser" autocomplete="username" inputmode="numeric" />
     <label>密码</label>
-    <input id="gatePass" type="password" autocomplete="current-password" />
+    <input id="gatePass" type="password" autocomplete="new-password" autocapitalize="off" spellcheck="false" />
+    <label class="showpass"><input type="checkbox" id="gateShow" /> 显示密码（不对时勾上看一眼）</label>
     <button class="primary" id="gateLogin">登录</button>
     <div id="gateError"></div>
   </div>
@@ -259,14 +263,32 @@ function showApp(on) {
   document.getElementById('logout').style.display = on ? '' : 'none';
 }
 
+// 中文输入法很容易把数字和字母打成全角（１１０１１０ｎｍ），肉眼在密码框里
+// 完全看不出来。所以比对前统一做 NFKC 归一化 + 去零宽字符 + 去首尾空白。
+function canon(s) {
+  return (s || '')
+    .normalize('NFKC')
+    .replace(/[\u200b-\u200d\ufeff]/g, '')
+    .trim();
+}
+
 async function tryLogin() {
-  const user = document.getElementById('gateUser').value.trim();
-  const pass = document.getElementById('gatePass').value;
+  const user = canon(document.getElementById('gateUser').value);
+  const pass = canon(document.getElementById('gatePass').value);
   const err = document.getElementById('gateError');
   err.textContent = '';
   if (!user || !pass) { err.textContent = '账号和密码都要填。'; return; }
   const hash = await digest(user + ':' + pass);
-  if (hash !== AUTH_HASH) { err.textContent = '账号或密码不对。'; return; }
+  if (hash !== AUTH_HASH) {
+    // 长度只打到控制台，页面上不说 —— 免得把信息喂给乱试的人。
+    console.warn('[duoda] 登录失败：账号 %d 位、密码 %d 位（已做全角→半角归一化）',
+      user.length, pass.length);
+    err.innerHTML = '账号或密码不对。自查三点：<br>' +
+      '① 用英文/数字输入，不要用中文输入法（全角字符已经自动纠正，但如果是别的字符就不行）<br>' +
+      '② 别让浏览器自动填充，先清空再手打<br>' +
+      '③ 勾上「显示密码」看一眼实际内容';
+    return;
+  }
   localStorage.setItem(AUTH_KEY, AUTH_HASH);
   showApp(true);
   // 之前填过面板密钥就直接进数据。
@@ -471,6 +493,9 @@ $('base').value = state.base;
 $('secret').value = state.secret;
 
 $('gateLogin').onclick = tryLogin;
+$('gateShow').onchange = (e) => {
+  $('gatePass').type = e.target.checked ? 'text' : 'password';
+};
 $('gatePass').addEventListener('keydown', (e) => { if (e.key === 'Enter') tryLogin(); });
 $('gateUser').addEventListener('keydown', (e) => { if (e.key === 'Enter') $('gatePass').focus(); });
 $('logout').onclick = () => { localStorage.removeItem(AUTH_KEY); showApp(false); $('gatePass').value = ''; };
