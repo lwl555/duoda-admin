@@ -8,15 +8,5 @@
   "min_code": 0,
   "max_code": null,
   "published_at": "2026-11-15T19:59:11.572092+00:00"
- },
- {
-  "notice_id": "n-1794771695",
-  "title": "多答 1.4.1 已发布",
-  "body": "这一版修好了长消息发不出去、无障碍权限误报「没打开」这两个问题。\n点「去看看」下载安装，直接覆盖就行，原来的模型配置和技能都还在。",
-  "level": "update",
-  "url": "https://github.com/lwl555/duoda-agent/releases/latest",
-  "min_code": 0,
-  "max_code": null,
-  "published_at": "2026-11-15T19:41:35.394075+00:00"
  }
 ]
