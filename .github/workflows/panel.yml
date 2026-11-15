@@ -1,10 +1,15 @@
 name: 多答面板
 
+# 这个文件部署到 lwl555/duoda-admin 仓库的 .github/workflows/panel.yml。
+# 它的唯一任务：在 GitHub 的机器上访问 Supabase（国内访问不了），
+# 把设备 / 日志 / 公告拉回来，写成静态 JSON 推到 Pages，
+# 于是国内浏览器和手机 App 只要打开 github.io 就能看到面板数据。
+
 on:
   workflow_dispatch:
     inputs:
       action:
-        description: '动作：notice=发公告 / drop=撤公告 / list=看设备与日志 / sync=只刷新静态公告'
+        description: '动作：notice=发公告 / drop=撤公告 / list=看设备与日志 / sync=只刷新静态快照'
         required: true
         default: 'notice'
         type: choice
@@ -34,14 +39,25 @@ on:
         required: false
         default: ''
 
+  # 每 6 小时自动刷一次快照，面板数据不会太旧。
+  # 注意：GitHub 对 60 天没有任何提交的仓库会自动停掉定时任务，
+  # 真停了就手动跑一次 sync 即可恢复。
+  schedule:
+    - cron: '0 */6 * * *'
+
 permissions:
   contents: write
+
+concurrency:
+  group: duoda-panel
+  cancel-in-progress: false
 
 jobs:
   panel:
     runs-on: ubuntu-latest
     steps:
       - name: 调用 Supabase
+        if: ${{ github.event_name == 'workflow_dispatch' && inputs.action != 'sync' }}
         env:
           BASE: 'https://wcnssyiqitugqfmcbdhe.supabase.co'
           ANON: 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6IndjbnNzeWlxaXR1Z3FmbWNiZGhlIiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODM0MDEyNzUsImV4cCI6MjA5ODk3NzI3NX0.9EfbEr7BQhZtbOwHJ3IrkOy16kcaxlmzuJuV0A2Z8Eg'
@@ -83,10 +99,12 @@ jobs:
               ;;
           esac
 
-      # 把当前公告写一份静态 JSON 到 Pages 上。国内掐 *.supabase.co，但 github.io
-      # 基本能开，App 拉不到后端时靠这份镜像弹窗，否则「远程推送更新」在国内失效。
-      - name: 刷新静态公告
-        if: ${{ inputs.action == 'notice' || inputs.action == 'drop' || inputs.action == 'sync' }}
+      # 国内掐 *.supabase.co（按域名 SNI 封），但 github.io 基本能开。
+      # 所以这里把三份数据都落成静态文件：
+      #   notices.json —— App 拉不到后端时的公告镜像（三级回落最后一级）
+      #   panel.json   —— 管理面板的整页快照（设备 / 日志 / 公告一次拿全）
+      - name: 刷新静态快照
+        if: ${{ always() }}
         env:
           BASE: 'https://wcnssyiqitugqfmcbdhe.supabase.co'
           ANON: 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6IndjbnNzeWlxaXR1Z3FmbWNiZGhlIiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODM0MDEyNzUsImV4cCI6MjA5ODk3NzI3NX0.9EfbEr7BQhZtbOwHJ3IrkOy16kcaxlmzuJuV0A2Z8Eg'
@@ -94,42 +112,93 @@ jobs:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
           set -e
-          curl -sS --fail-with-body -X POST \
-            -H "apikey: $ANON" -H "Authorization: Bearer $ANON" -H "Content-Type: application/json" \
-            "$BASE/rest/v1/rpc/duoda_panel_notices" \
-            -d "$(jq -n --arg s "$SECRET" '{p_secret:$s}')" > /tmp/raw.json
+          hdr=(-H "apikey: $ANON" -H "Authorization: Bearer $ANON" -H "Content-Type: application/json")
+          body=$(jq -n --arg s "$SECRET" '{p_secret:$s}')
+
+          # 三个都各拉一遍。任何一个失败就留空数组，不要让整步炸掉，
+          # 否则一份数据坏了会把另外两份也一起拖死。
+          for pair in "panel_feed:devices" "panel_logs:logs" "duoda_panel_notices:notices"; do
+            fn="${pair%%:*}"; out="${pair##*:}"
+            if curl -sS --fail-with-body --max-time 60 -X POST "${hdr[@]}" \
+                 "$BASE/rest/v1/rpc/$fn" -d "$body" > "/tmp/$out.json" 2> "/tmp/$out.err"; then
+              echo "$fn -> /tmp/$out.json ($(wc -c < /tmp/$out.json) bytes)"
+            else
+              echo "::warning::$fn 拉取失败：$(cat /tmp/$out.err)"
+              echo '[]' > "/tmp/$out.json"
+            fi
+          done
 
           python3 - <<'PY'
-          import json, base64, os, urllib.request
+          import json, base64, os, urllib.request, urllib.error
+          from datetime import datetime, timezone
 
-          raw = json.load(open('/tmp/raw.json'))
-          rows = [r for r in raw if r.get('active', True)] if isinstance(raw, list) else []
-          # 只留 App 需要的字段，顺手把 published_at 之外的东西去掉。
+          def load(name):
+              try:
+                  v = json.load(open('/tmp/%s.json' % name, encoding='utf-8'))
+              except Exception as e:
+                  print('  解析 %s 失败：%s' % (name, e))
+                  return []
+              if isinstance(v, dict):
+                  # 有的 RPC 出错时回 {"code":..,"message":..}，当空处理
+                  print('  %s 返回的是对象而不是数组，按空处理' % name)
+                  return []
+              return v
+
+          devices = load('devices')
+          logs = load('logs')
+          raw_notices = load('notices')
+
           keep = ('notice_id', 'title', 'body', 'level', 'url',
                   'min_code', 'max_code', 'published_at')
-          out = [{k: r.get(k) for k in keep} for r in rows]
-          text = json.dumps(out, ensure_ascii=False, indent=1)
-          print('notices:', len(out))
+          notices = [{k: r.get(k) for k in keep}
+                     for r in raw_notices if r.get('active', True)]
+
+          # 日志只留最近 300 条，免得 panel.json 越滚越大
+          if len(logs) > 300:
+              logs = logs[:300]
+
+          now = datetime.now(timezone.utc).strftime('%Y-%m-%dT%H:%M:%SZ')
+          snap = {
+              'generated_at': now,
+              'devices': devices,
+              'logs': logs,
+              'notices': notices,
+          }
+          snap_text = json.dumps(snap, ensure_ascii=False, indent=1)
+          notices_text = json.dumps(notices, ensure_ascii=False, indent=1)
+          print('devices:%d logs:%d notices:%d' % (len(devices), len(logs), len(notices)))
 
           token = os.environ['GH_TOKEN']
-          api = 'https://api.github.com/repos/lwl555/duoda-admin/contents/notices.json'
-          req = urllib.request.Request(api)
-          req.add_header('Authorization', 'token ' + token)
-          req.add_header('Accept', 'application/vnd.github+json')
-          sha = None
-          try:
-              sha = json.loads(urllib.request.urlopen(req, timeout=30).read()).get('sha')
-          except urllib.error.HTTPError as e:
-              if e.code != 404:
-                  raise
 
-          body = {'message': 'sync notices.json', 'content': base64.b64encode(text.encode()).decode()}
-          if sha:
-              body['sha'] = sha
-          put = urllib.request.Request(api, data=json.dumps(body).encode(), method='PUT')
-          put.add_header('Authorization', 'token ' + token)
-          put.add_header('Accept', 'application/vnd.github+json')
-          put.add_header('Content-Type', 'application/json')
-          r = json.loads(urllib.request.urlopen(put, timeout=30).read())
-          print('pushed', r['content']['path'], r['commit']['sha'][:8])
+          def push(path, text):
+              api = 'https://api.github.com/repos/lwl555/duoda-admin/contents/' + path
+              req = urllib.request.Request(api)
+              req.add_header('Authorization', 'token ' + token)
+              req.add_header('Accept', 'application/vnd.github+json')
+              sha = None
+              try:
+                  sha = json.loads(urllib.request.urlopen(req, timeout=30).read()).get('sha')
+              except urllib.error.HTTPError as e:
+                  if e.code != 404:
+                      raise
+              payload = {'message': 'sync ' + path,
+                         'content': base64.b64encode(text.encode()).decode()}
+              if sha:
+                  payload['sha'] = sha
+              put = urllib.request.Request(api, data=json.dumps(payload).encode(), method='PUT')
+              put.add_header('Authorization', 'token ' + token)
+              put.add_header('Accept', 'application/vnd.github+json')
+              put.add_header('Content-Type', 'application/json')
+              r = json.loads(urllib.request.urlopen(put, timeout=30).read())
+              print('  pushed %s (%d bytes, commit %s)'
+                    % (r['content']['path'], len(text.encode()), r['commit']['sha'][:8]))
+
+          push('notices.json', notices_text)
+          push('panel.json', snap_text)
+          print('done at', now)
           PY
+
+      - name: 提示
+        if: ${{ github.event_name == 'workflow_dispatch' && inputs.action != 'sync' }}
+        run: |
+          echo "记得去 Actions 里再手动跑一次 action=sync，或者等 6 小时自动刷新，快照才会更新。"
