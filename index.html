@@ -404,6 +404,18 @@ function ago(iso) {
   return Math.floor(d / 86400) + ' 天前';
 }
 
+// 实时通道失败时顺手退回快照：用户在国内填了直连地址时，至少还能看到
+// 上一次的数据，而不是一片「Failed to fetch」。
+async function snapFallback(field) {
+  try {
+    const snap = await staticPanel();
+    const rows = Array.isArray(snap[field]) ? snap[field] : [];
+    return { rows: rows, at: snap.generated_at || '' };
+  } catch (_) {
+    return null;
+  }
+}
+
 async function loadDevices() {
   try {
     let tail = '';
@@ -420,6 +432,13 @@ async function loadDevices() {
     sel.innerHTML = state.devices.map((d) => '<option value="' + esc(d.device_id) + '">' + esc((d.model || d.device_id) + ' · ' + (d.app_version || '?')) + '</option>').join('');
     status('设备 ' + state.devices.length + ' 台' + tail, true);
   } catch (e) {
+    const snap = await snapFallback('devices');
+    if (snap) {
+      state.devices = snap.rows;
+      renderDevices();
+      status('实时读不到（' + e.message + '），已切快照' + (snap.at ? ' · ' + ago(snap.at) : ''), false);
+      return;
+    }
     status('读设备失败：' + e.message, false);
   }
 }
@@ -458,6 +477,13 @@ async function loadLogs() {
     renderLogs();
     status('日志 ' + state.logs.length + ' 台', true);
   } catch (e) {
+    const snap = await snapFallback('logs');
+    if (snap) {
+      state.logs = snap.rows;
+      renderLogs();
+      status('实时读不到（' + e.message + '），已切快照' + (snap.at ? ' · ' + ago(snap.at) : ''), false);
+      return;
+    }
     status('读日志失败：' + e.message, false);
   }
 }
@@ -490,6 +516,13 @@ async function loadNotices() {
     renderNotices();
     status('公告 ' + state.notices.length + ' 条' + tail, true);
   } catch (e) {
+    const snap = await snapFallback('notices');
+    if (snap) {
+      state.notices = snap.rows;
+      renderNotices();
+      status('实时读不到（' + e.message + '），已切快照' + (snap.at ? ' · ' + ago(snap.at) : ''), false);
+      return;
+    }
     // 分清两件事：Failed to fetch / NetworkError 是**网络层**——国内按域名（SNI）
     // 封 *.supabase.co，手机直连连 TLS 都握不上，跟 SQL 一字关系没有。
     // 只有 HTTP 4xx/5xx（rpc 里抛的是 'HTTP <code>'）才可能是函数没建。
