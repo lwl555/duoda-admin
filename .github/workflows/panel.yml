@@ -4,7 +4,7 @@ on:
   workflow_dispatch:
     inputs:
       action:
-        description: '动作：notice=发公告 / drop=撤公告 / list=看设备与日志'
+        description: '动作：notice=发公告 / drop=撤公告 / list=看设备与日志 / sync=只刷新静态公告'
         required: true
         default: 'notice'
         type: choice
@@ -12,6 +12,7 @@ on:
           - notice
           - drop
           - list
+          - sync
       title:
         description: '公告标题（notice 必填）'
         required: false
@@ -32,6 +33,9 @@ on:
         description: '撤公告时填 notice_id，留空则撤回全部'
         required: false
         default: ''
+
+permissions:
+  contents: write
 
 jobs:
   panel:
@@ -78,3 +82,54 @@ jobs:
               echo; echo "::endgroup::"
               ;;
           esac
+
+      # 把当前公告写一份静态 JSON 到 Pages 上。国内掐 *.supabase.co，但 github.io
+      # 基本能开，App 拉不到后端时靠这份镜像弹窗，否则「远程推送更新」在国内失效。
+      - name: 刷新静态公告
+        if: ${{ inputs.action == 'notice' || inputs.action == 'drop' || inputs.action == 'sync' }}
+        env:
+          BASE: 'https://wcnssyiqitugqfmcbdhe.supabase.co'
+          ANON: 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6IndjbnNzeWlxaXR1Z3FmbWNiZGhlIiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODM0MDEyNzUsImV4cCI6MjA5ODk3NzI3NX0.9EfbEr7BQhZtbOwHJ3IrkOy16kcaxlmzuJuV0A2Z8Eg'
+          SECRET: 'ba3a826a83234c0c9e40a2fc4e9fb1c16116b914'
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          set -e
+          curl -sS --fail-with-body -X POST \
+            -H "apikey: $ANON" -H "Authorization: Bearer $ANON" -H "Content-Type: application/json" \
+            "$BASE/rest/v1/rpc/duoda_panel_notices" \
+            -d "$(jq -n --arg s "$SECRET" '{p_secret:$s}')" > /tmp/raw.json
+
+          python3 - <<'PY'
+          import json, base64, os, urllib.request
+
+          raw = json.load(open('/tmp/raw.json'))
+          rows = [r for r in raw if r.get('active', True)] if isinstance(raw, list) else []
+          # 只留 App 需要的字段，顺手把 published_at 之外的东西去掉。
+          keep = ('notice_id', 'title', 'body', 'level', 'url',
+                  'min_code', 'max_code', 'published_at')
+          out = [{k: r.get(k) for k in keep} for r in rows]
+          text = json.dumps(out, ensure_ascii=False, indent=1)
+          print('notices:', len(out))
+
+          token = os.environ['GH_TOKEN']
+          api = 'https://api.github.com/repos/lwl555/duoda-admin/contents/notices.json'
+          req = urllib.request.Request(api)
+          req.add_header('Authorization', 'token ' + token)
+          req.add_header('Accept', 'application/vnd.github+json')
+          sha = None
+          try:
+              sha = json.loads(urllib.request.urlopen(req, timeout=30).read()).get('sha')
+          except urllib.error.HTTPError as e:
+              if e.code != 404:
+                  raise
+
+          body = {'message': 'sync notices.json', 'content': base64.b64encode(text.encode()).decode()}
+          if sha:
+              body['sha'] = sha
+          put = urllib.request.Request(api, data=json.dumps(body).encode(), method='PUT')
+          put.add_header('Authorization', 'token ' + token)
+          put.add_header('Accept', 'application/vnd.github+json')
+          put.add_header('Content-Type', 'application/json')
+          r = json.loads(urllib.request.urlopen(put, timeout=30).read())
+          print('pushed', r['content']['path'], r['commit']['sha'][:8])
+          PY
