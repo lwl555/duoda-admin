@@ -1,0 +1,55 @@
+{
+ "generated_at": "2026-11-15T21:16:37Z",
+ "devices": [
+  {
+   "device_id": "probe_insert_1",
+   "model": "v1.4.0-selftest",
+   "brand": "duoda",
+   "android": 34,
+   "release": "14",
+   "abi": null,
+   "app_version": "1.4.0",
+   "app_code": 4,
+   "agent": {
+    "name": "多答 Agent",
+    "autoMode": true
+   },
+   "apps": [],
+   "apps_count": 0,
+   "lat": null,
+   "lng": null,
+   "location_source": null,
+   "location_accuracy": null,
+   "location_at": null,
+   "satellites": null,
+   "location_granted": null,
+   "updated_at": "2026-11-15T19:26:12.514676+00:00"
+  }
+ ],
+ "logs": [
+  {
+   "device_id": "probe_insert_1",
+   "app_version": "1.4.0",
+   "count": 1,
+   "entries": [
+    {
+     "at": 1763257000000,
+     "event": "selftest.pass"
+    }
+   ],
+   "updated_at": "2026-11-15T19:26:13.45917+00:00"
+  }
+ ],
+ "notices": [
+  {
+   "notice_id": "n-1794772752",
+   "title": "多答 1.4.2 已发布",
+   "body": "这一版把公告和「远程推送更新」在国内彻底打通了。\n点「去看看」下载安装，直接覆盖，原来的模型配置和技能都还在。",
+   "level": "update",
+   "url": "https://github.com/lwl555/duoda-agent/releases/latest",
+   "min_code": 0,
+   "max_code": null,
+   "published_at": "2026-11-15T19:59:11.572092+00:00"
+  }
+ ]
+}
