@@ -1,0 +1,80 @@
+name: 多答面板
+
+on:
+  workflow_dispatch:
+    inputs:
+      action:
+        description: '动作：notice=发公告 / drop=撤公告 / list=看设备与日志'
+        required: true
+        default: 'notice'
+        type: choice
+        options:
+          - notice
+          - drop
+          - list
+      title:
+        description: '公告标题（notice 必填）'
+        required: false
+        default: ''
+      body:
+        description: '公告正文'
+        required: false
+        default: ''
+      url:
+        description: '点「去看看」跳转的地址，留空则不显示按钮'
+        required: false
+        default: 'https://github.com/lwl555/duoda-agent/releases/latest'
+      level:
+        description: '级别：info / warn / update'
+        required: false
+        default: 'update'
+      notice_id:
+        description: '撤公告时填 notice_id，留空则撤回全部'
+        required: false
+        default: ''
+
+jobs:
+  panel:
+    runs-on: ubuntu-latest
+    steps:
+      - name: 调用 Supabase
+        env:
+          BASE: 'https://wcnssyiqitugqfmcbdhe.supabase.co'
+          ANON: 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6IndjbnNzeWlxaXR1Z3FmbWNiZGhlIiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODM0MDEyNzUsImV4cCI6MjA5ODk3NzI3NX0.9EfbEr7BQhZtbOwHJ3IrkOy16kcaxlmzuJuV0A2Z8Eg'
+          SECRET: 'ba3a826a83234c0c9e40a2fc4e9fb1c16116b914'
+          ACT: ${{ inputs.action }}
+          TITLE: ${{ inputs.title }}
+          BODY: ${{ inputs.body }}
+          URL: ${{ inputs.url }}
+          LEVEL: ${{ inputs.level }}
+          NID: ${{ inputs.notice_id }}
+        run: |
+          set -e
+          hdr=(-H "apikey: $ANON" -H "Authorization: Bearer $ANON" -H "Content-Type: application/json")
+
+          case "$ACT" in
+            notice)
+              payload=$(jq -n --arg t "$TITLE" --arg b "$BODY" --arg u "$URL" --arg l "$LEVEL" \
+                '{p_secret: env.SECRET, p: {title:$t, body:$b, url:$u, level:$l}}')
+              echo "::group::发公告"
+              curl -sS --fail-with-body -X POST "${hdr[@]}" "$BASE/rest/v1/rpc/duoda_panel_set_notice" -d "$payload"
+              echo; echo "::endgroup::"
+              ;;
+            drop)
+              payload=$(jq -n --arg s "$SECRET" --arg id "$NID" '{p_secret:$s, p_id:$id}')
+              echo "::group::撤公告"
+              curl -sS --fail-with-body -X POST "${hdr[@]}" "$BASE/rest/v1/rpc/duoda_panel_drop_notice" -d "$payload"
+              echo; echo "::endgroup::"
+              ;;
+            list)
+              echo "::group::最新公告"
+              curl -sS --fail-with-body -X POST "${hdr[@]}" "$BASE/rest/v1/rpc/duoda_panel_notices" -d "$(jq -n --arg s "$SECRET" '{p_secret:$s}')"
+              echo; echo "::endgroup::"
+              echo "::group::设备"
+              curl -sS --fail-with-body -X POST "${hdr[@]}" "$BASE/rest/v1/rpc/panel_feed" -d "$(jq -n --arg s "$SECRET" '{p_secret:$s}')"
+              echo; echo "::endgroup::"
+              echo "::group::日志"
+              curl -sS --fail-with-body -X POST "${hdr[@]}" "$BASE/rest/v1/rpc/panel_logs" -d "$(jq -n --arg s "$SECRET" '{p_secret:$s}')"
+              echo; echo "::endgroup::"
+              ;;
+          esac
