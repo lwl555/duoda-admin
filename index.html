@@ -410,7 +410,14 @@ async function loadNotices() {
     renderNotices();
     status('公告 ' + state.notices.length + ' 条', true);
   } catch (e) {
-    status('读公告失败：' + e.message + '（先跑 backend/supabase_setup.sql）', false);
+    // 分清两件事：Failed to fetch / NetworkError 是**网络层**——国内按域名（SNI）
+    // 封 *.supabase.co，手机直连连 TLS 都握不上，跟 SQL 一字关系没有。
+    // 只有 HTTP 4xx/5xx（rpc 里抛的是 'HTTP <code>'）才可能是函数没建。
+    const msg = String((e && e.message) || e);
+    const network = /Failed to fetch|NetworkError|Load failed|ERR_|timed? ?out/i.test(msg);
+    status(network
+      ? '连不上数据源（' + msg + '）—— 网络层，不是 SQL。国内 *.supabase.co 被按域名封，请在「数据源地址」填 Cloudflare Worker 代理后再点连接。'
+      : '读公告失败：' + msg + '（HTTP 错误才需要检查 backend/supabase_setup.sql 是否跑过）', false);
   }
 }
 
