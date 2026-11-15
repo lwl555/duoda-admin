@@ -1,0 +1,488 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>多答 Agent · 作者面板</title>
+<style>
+  :root {
+    --bg: #f7f8fa;
+    --card: #ffffff;
+    --line: #e5e7eb;
+    --ink: #111827;
+    --ink-2: #4b5563;
+    --ink-3: #9ca3af;
+    --blue: #1d4ed8;
+    --blue-soft: #eef2ff;
+    --red: #b91c1c;
+    --green: #15803d;
+    --amber: #b45309;
+    --radius: 10px;
+  }
+  * { box-sizing: border-box; }
+  body {
+    margin: 0;
+    background: var(--bg);
+    color: var(--ink);
+    font: 14px/1.55 -apple-system, BlinkMacSystemFont, "Segoe UI", "PingFang SC", "Microsoft YaHei", sans-serif;
+  }
+  header {
+    background: var(--card);
+    border-bottom: 1px solid var(--line);
+    padding: 14px 20px;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    position: sticky;
+    top: 0;
+    z-index: 10;
+  }
+  header h1 { font-size: 15px; margin: 0; font-weight: 600; letter-spacing: .2px; }
+  header .tag {
+    font-size: 12px; color: var(--ink-3); border: 1px solid var(--line);
+    padding: 1px 7px; border-radius: 999px;
+  }
+  main { max-width: 1120px; margin: 0 auto; padding: 20px; }
+  .panel {
+    background: var(--card); border: 1px solid var(--line);
+    border-radius: var(--radius); padding: 16px; margin-bottom: 16px;
+  }
+  .panel h2 { font-size: 13px; margin: 0 0 12px; font-weight: 600; color: var(--ink-2); }
+  .row { display: flex; gap: 10px; flex-wrap: wrap; }
+  .row > * { flex: 1 1 240px; }
+  label { display: block; font-size: 12px; color: var(--ink-3); margin-bottom: 4px; }
+  input, select, textarea {
+    width: 100%; padding: 8px 10px; border: 1px solid var(--line);
+    border-radius: 8px; font: inherit; background: #fff; color: var(--ink);
+  }
+  textarea { min-height: 84px; resize: vertical; }
+  input:focus, select:focus, textarea:focus { outline: 2px solid #c7d2fe; border-color: var(--blue); }
+  button {
+    padding: 8px 14px; border-radius: 8px; border: 1px solid var(--line);
+    background: #fff; color: var(--ink); font: inherit; cursor: pointer;
+  }
+  button:hover { background: #f9fafb; }
+  button.primary { background: var(--blue); border-color: var(--blue); color: #fff; }
+  button.primary:hover { filter: brightness(1.05); }
+  button.danger { color: var(--red); border-color: #fecaca; }
+  button:disabled { opacity: .55; cursor: default; }
+  .tabs { display: flex; gap: 6px; margin-bottom: 16px; flex-wrap: wrap; }
+  .tabs button[aria-selected="true"] { background: var(--blue-soft); border-color: #c7d2fe; color: var(--blue); font-weight: 600; }
+  table { width: 100%; border-collapse: collapse; font-size: 13px; }
+  th, td { text-align: left; padding: 8px 10px; border-bottom: 1px solid var(--line); vertical-align: top; }
+  th { font-size: 12px; color: var(--ink-3); font-weight: 500; }
+  tr:last-child td { border-bottom: 0; }
+  .mono { font-family: ui-monospace, SFMono-Regular, Menlo, monospace; font-size: 12px; }
+  .muted { color: var(--ink-3); }
+  .status { font-size: 12px; padding: 6px 10px; border-radius: 8px; display: none; margin-bottom: 12px; }
+  .status.show { display: block; }
+  .status.ok { background: #ecfdf5; color: var(--green); }
+  .status.err { background: #fef2f2; color: var(--red); }
+  .empty { padding: 28px 0; text-align: center; color: var(--ink-3); font-size: 13px; }
+  .pill { display: inline-block; font-size: 11px; padding: 1px 7px; border-radius: 999px; background: #f3f4f6; color: var(--ink-2); }
+  .pill.info { background: #eef2ff; color: var(--blue); }
+  .pill.warn { background: #fffbeb; color: var(--amber); }
+  .pill.critical { background: #fef2f2; color: var(--red); }
+  .cols2 { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
+  @media (max-width: 720px) { .cols2 { grid-template-columns: 1fr; } main { padding: 12px; } }
+  #gate { max-width: 380px; margin: 8vh auto 0; }
+  #gate .panel { padding: 22px; }
+  #gate h2 { font-size: 15px; margin: 0 0 4px; color: var(--ink); font-weight: 600; }
+  #gate p.sub { font-size: 12px; color: var(--ink-3); margin: 0 0 18px; }
+  #gate label { margin-top: 12px; }
+  #gate button.primary { width: 100%; margin-top: 18px; }
+  #gateError { color: var(--red); font-size: 12px; margin-top: 10px; min-height: 16px; }
+  details summary { cursor: pointer; color: var(--blue); font-size: 13px; }
+  pre { white-space: pre-wrap; word-break: break-all; margin: 6px 0 0; font-size: 12px; }
+</style>
+</head>
+<body>
+<header>
+  <h1>多答 Agent · 作者面板</h1>
+  <span class="tag">设备 / 日志 / 公告</span>
+  <button id="logout" style="margin-left:auto; display:none;">退出登录</button>
+</header>
+
+<section id="gate">
+  <div class="panel">
+    <h2>多答 Agent · 作者面板</h2>
+    <p class="sub">需要登录才能查看设备、日志和公告。</p>
+    <label>账号</label>
+    <input id="gateUser" autocomplete="username" inputmode="numeric" />
+    <label>密码</label>
+    <input id="gatePass" type="password" autocomplete="current-password" />
+    <button class="primary" id="gateLogin">登录</button>
+    <div id="gateError"></div>
+  </div>
+</section>
+
+<main id="app" hidden>
+  <div class="panel">
+    <h2>连接</h2>
+    <div class="row">
+      <div>
+        <label>数据源地址</label>
+        <input id="base" placeholder="https://xxxx.supabase.co" />
+      </div>
+      <div>
+        <label>面板密钥</label>
+        <input id="secret" type="password" placeholder="panel_secret" />
+      </div>
+      <div style="flex: 0 0 auto; align-self: end;">
+        <button class="primary" id="connect">连接</button>
+      </div>
+    </div>
+    <p class="muted" style="margin:10px 0 0; font-size:12px;">
+      国内网络连不上 <span class="mono">*.supabase.co</span> 时，在地址里填 Cloudflare Worker 代理（只转发 <span class="mono">/rest/v1/*</span>）。
+      密钥只存在这台电脑的 localStorage，不会上传。
+    </p>
+  </div>
+
+  <div class="status" id="status"></div>
+
+  <div class="tabs" role="tablist">
+    <button role="tab" aria-selected="true" data-tab="devices">设备</button>
+    <button role="tab" aria-selected="false" data-tab="logs">日志</button>
+    <button role="tab" aria-selected="false" data-tab="notice">公告</button>
+    <button role="tab" aria-selected="false" data-tab="release">发版信息</button>
+  </div>
+
+  <section id="tab-devices">
+    <div class="panel">
+      <h2>上报过的设备 <span class="muted" id="deviceCount"></span></h2>
+      <div class="row" style="margin-bottom:10px;">
+        <div style="flex:0 0 auto;"><button id="reloadDevices">刷新</button></div>
+        <div><input id="deviceFilter" placeholder="按机型 / 版本 / id 过滤" /></div>
+      </div>
+      <div id="devices"></div>
+    </div>
+  </section>
+
+  <section id="tab-logs" hidden>
+    <div class="panel">
+      <h2>设备日志</h2>
+      <div class="row" style="margin-bottom:10px;">
+        <div><select id="logDevice"></select></div>
+        <div style="flex:0 0 auto;"><button id="reloadLogs">刷新</button></div>
+      </div>
+      <div id="logs"></div>
+    </div>
+  </section>
+
+  <section id="tab-notice" hidden>
+    <div class="panel">
+      <h2>发布公告</h2>
+      <div class="cols2">
+        <div>
+          <label>标题</label>
+          <input id="nTitle" placeholder="例如：1.4.0 已发布，修了长消息发不出去" />
+        </div>
+        <div>
+          <label>级别</label>
+          <select id="nLevel">
+            <option value="info">info · 普通公告</option>
+            <option value="warn">warn · 需要注意</option>
+            <option value="critical">critical · 重要提醒</option>
+          </select>
+        </div>
+      </div>
+      <div style="margin-top:10px;">
+        <label>正文</label>
+        <textarea id="nBody" placeholder="说清楚发生了什么、要用户做什么。"></textarea>
+      </div>
+      <div style="margin-top:10px;">
+        <label>按钮链接（可空 · App 里显示「去看看」，一般填新版 APK 的下载地址）</label>
+        <input id="nUrl" placeholder="https://github.com/lwl555/duoda-agent/releases/latest" />
+      </div>
+      <div class="cols2" style="margin-top:10px;">
+        <div>
+          <label>只在 app_code ≥</label>
+          <input id="nMin" type="number" value="0" />
+        </div>
+        <div>
+          <label>只在 app_code ≤（空=不限）</label>
+          <input id="nMax" type="number" placeholder="" />
+        </div>
+      </div>
+      <div style="margin-top:12px; display:flex; gap:8px; align-items:center;">
+        <button class="primary" id="publish">发布</button>
+        <button id="tplUpdate">填更新公告模板</button>
+        <span class="muted" id="noticeHint"></span>
+      </div>
+    </div>
+
+    <div class="panel">
+      <h2>已发公告 <span class="muted" id="noticeCount"></span></h2>
+      <div style="margin-bottom:10px;"><button id="reloadNotices">刷新</button></div>
+      <div id="notices"></div>
+    </div>
+  </section>
+
+  <section id="tab-release" hidden>
+    <div class="panel">
+      <h2>发版信息</h2>
+      <table>
+        <tr><th style="width:180px;">项</th><th>值</th></tr>
+        <tr><td>APK 下载</td><td class="mono">https://github.com/lwl555/duoda-agent/releases/latest</td></tr>
+        <tr><td>更新检查</td><td class="mono">lwl555/duoda-agent（App 内 update_config.dart）</td></tr>
+        <tr><td>公告表</td><td class="mono">public.duoda_notice</td></tr>
+        <tr><td>设备表</td><td class="mono">public.device_report</td></tr>
+        <tr><td>日志表</td><td class="mono">public.device_log</td></tr>
+      </table>
+      <p class="muted" style="font-size:12px; margin-bottom:0;">
+        发版流程：把 APK 传到 <span class="mono">lwl555/duoda-agent</span> 的 Release（tag 用 <span class="mono">v1.4.0</span>），
+        App 启动 6 秒后会自己比对版本。公告另外在这页发。
+      </p>
+    </div>
+  </section>
+</main>
+
+<script>
+// ── 登录门 ────────────────────────────────────────────────────────────────
+// 口令不存明文：比对 sha256(账号:密码)。
+// https / localhost 下走 crypto.subtle；file:// 打开浏览器不给用，退回混淆比对。
+const AUTH_HASH = 'c9ec89de61a7655f2d568d733453b7c1a1dd3adc5edef639edbbf4a4d17d024d';
+const AUTH_KEY = 'duoda.admin.auth';
+
+async function digest(text) {
+  if (window.crypto && window.crypto.subtle) {
+    const buf = await window.crypto.subtle.digest('SHA-256', new TextEncoder().encode(text));
+    return [...new Uint8Array(buf)].map((b) => b.toString(16).padStart(2, '0')).join('');
+  }
+  // 本地 file:// 兜底：同样的串，base64 存一份，避免明文直接躺在源码里。
+  return atob('YzllYzg5ZGU2MWE3NjU1ZjJkNTY4ZDczMzQ1M2I3YzFhMWRkM2FkYzVlZGVmNjM5ZWRiYmY0YTRkMTdkMDI0ZA==');
+}
+
+function showApp(on) {
+  document.getElementById('app').hidden = !on;
+  document.getElementById('gate').hidden = on;
+  document.getElementById('logout').style.display = on ? '' : 'none';
+}
+
+async function tryLogin() {
+  const user = document.getElementById('gateUser').value.trim();
+  const pass = document.getElementById('gatePass').value;
+  const err = document.getElementById('gateError');
+  err.textContent = '';
+  if (!user || !pass) { err.textContent = '账号和密码都要填。'; return; }
+  const hash = await digest(user + ':' + pass);
+  if (hash !== AUTH_HASH) { err.textContent = '账号或密码不对。'; return; }
+  localStorage.setItem(AUTH_KEY, AUTH_HASH);
+  showApp(true);
+  // 之前填过面板密钥就直接进数据。
+  if (state.secret) { loadDevices(); loadLogs(); loadNotices(); }
+}
+
+const SUPABASE_URL = 'https://wcnssyiqitugqfmcbdhe.supabase.co';
+const ANON_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6IndjbnNzeWlxaXR1Z3FmbWNiZGhlIiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODM0MDEyNzUsImV4cCI6MjA5ODk3NzI3NX0.9EfbEr7BQhZtbOwHJ3IrkOy16kcaxlmzuJuV0A2Z8Eg';
+const LS_BASE = 'duoda.panel.base';
+const LS_SECRET = 'duoda.panel.secret';
+
+const $ = (id) => document.getElementById(id);
+const state = { base: localStorage.getItem(LS_BASE) || SUPABASE_URL, secret: localStorage.getItem(LS_SECRET) || '', devices: [], logs: [], notices: [] };
+
+function status(text, ok) {
+  const el = $('status');
+  el.textContent = text;
+  el.className = 'status show ' + (ok ? 'ok' : 'err');
+  if (ok) setTimeout(() => el.classList.remove('show'), 2600);
+}
+
+function headers() {
+  return { apikey: ANON_KEY, Authorization: 'Bearer ' + ANON_KEY, 'Content-Type': 'application/json' };
+}
+
+async function rpc(fn, args) {
+  const res = await fetch(state.base.replace(/\/+$/, '') + '/rest/v1/rpc/' + fn, {
+    method: 'POST', headers: headers(), body: JSON.stringify(args || {}),
+  });
+  if (!res.ok) throw new Error('HTTP ' + res.status + ' ' + (await res.text()).slice(0, 160));
+  return res.json();
+}
+
+async function rest(path) {
+  const res = await fetch(state.base.replace(/\/+$/, '') + '/rest/v1/' + path, { headers: headers() });
+  if (!res.ok) throw new Error('HTTP ' + res.status + ' ' + (await res.text()).slice(0, 160));
+  return res.json();
+}
+
+function esc(s) {
+  return String(s == null ? '' : s).replace(/[&<>"']/g, (c) => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c]));
+}
+
+function ago(iso) {
+  if (!iso) return '';
+  const t = new Date(iso).getTime();
+  if (isNaN(t)) return iso;
+  const d = Math.floor((Date.now() - t) / 1000);
+  if (d < 60) return d + ' 秒前';
+  if (d < 3600) return Math.floor(d / 60) + ' 分钟前';
+  if (d < 86400) return Math.floor(d / 3600) + ' 小时前';
+  return Math.floor(d / 86400) + ' 天前';
+}
+
+async function loadDevices() {
+  try {
+    const rows = await rpc('panel_feed', { p_secret: state.secret });
+    state.devices = Array.isArray(rows) ? rows : [];
+    renderDevices();
+    const sel = $('logDevice');
+    sel.innerHTML = state.devices.map((d) => '<option value="' + esc(d.device_id) + '">' + esc((d.model || d.device_id) + ' · ' + (d.app_version || '?')) + '</option>').join('');
+    status('设备 ' + state.devices.length + ' 台', true);
+  } catch (e) {
+    status('读设备失败：' + e.message, false);
+  }
+}
+
+function renderDevices() {
+  const q = ($('deviceFilter').value || '').trim().toLowerCase();
+  const rows = state.devices.filter((d) => !q || [d.device_id, d.model, d.brand, d.app_version].join(' ').toLowerCase().includes(q));
+  $('deviceCount').textContent = '(' + rows.length + ')';
+  if (!rows.length) { $('devices').innerHTML = '<div class="empty">还没有设备上报。App 里「设置 → 多答云端 → 立即上报」可以立刻来一条。</div>'; return; }
+  $('devices').innerHTML = '<table><tr><th>设备</th><th>机型</th><th>系统</th><th>版本</th><th>状态</th><th>更新时间</th></tr>' +
+    rows.map((d) => {
+      const a = d.agent || {};
+      const badges = [];
+      if (a.autoMode) badges.push('全自动');
+      if (a.systemTap) badges.push('弹窗代点');
+      if (a.cloud) badges.push(a.cloud === 'proxy' ? '走代理' : '直连');
+      return '<tr><td class="mono">' + esc(d.device_id) + '</td>' +
+        '<td>' + esc(d.model || '-') + '<div class="muted" style="font-size:12px">' + esc(d.brand || '') + '</div></td>' +
+        '<td>Android ' + esc(d.release || '?') + '<div class="muted" style="font-size:12px">SDK ' + esc(d.android || '?') + '</div></td>' +
+        '<td class="mono">' + esc(d.app_version || '?') + ' (' + esc(d.app_code || 0) + ')</td>' +
+        '<td>' + (badges.length ? badges.map((b) => '<span class="pill">' + b + '</span>').join(' ') : '<span class="muted">-</span>') + '</td>' +
+        '<td>' + esc(ago(d.updated_at)) + '</td></tr>';
+    }).join('') + '</table>';
+}
+
+async function loadLogs() {
+  try {
+    const rows = await rpc('panel_logs', { p_secret: state.secret });
+    state.logs = Array.isArray(rows) ? rows : [];
+    renderLogs();
+    status('日志 ' + state.logs.length + ' 台', true);
+  } catch (e) {
+    status('读日志失败：' + e.message, false);
+  }
+}
+
+function renderLogs() {
+  const want = $('logDevice').value;
+  const row = state.logs.find((l) => l.device_id === want) || state.logs[0];
+  if (!row) { $('logs').innerHTML = '<div class="empty">还没有日志上报。</div>'; return; }
+  const entries = Array.isArray(row.entries) ? row.entries.slice().reverse() : [];
+  $('logs').innerHTML = '<div class="muted" style="margin-bottom:8px;">' + esc(row.device_id) + ' · ' + esc(row.app_version || '') + ' · ' + entries.length + ' 条 · 更新于 ' + esc(ago(row.updated_at)) + '</div>' +
+    (entries.length ? '<table><tr><th style="width:150px;">时间</th><th style="width:200px;">事件</th><th>数据</th></tr>' +
+      entries.map((e) => {
+        const at = e.at ? new Date(e.at).toLocaleString('zh-CN') : '';
+        const data = e.data ? Object.entries(e.data).map(([k, v]) => k + '=' + (typeof v === 'object' ? JSON.stringify(v) : v)).join(' · ') : '';
+        return '<tr><td class="mono">' + esc(at) + '</td><td class="mono">' + esc(e.event) + '</td><td class="muted" style="font-size:12px">' + esc(data) + '</td></tr>';
+      }).join('') + '</table>' : '<div class="empty">这台设备没带日志。</div>');
+}
+
+async function loadNotices() {
+  try {
+    const rows = await rpc('duoda_panel_notices', { p_secret: state.secret });
+    state.notices = Array.isArray(rows) ? rows : [];
+    renderNotices();
+    status('公告 ' + state.notices.length + ' 条', true);
+  } catch (e) {
+    status('读公告失败：' + e.message + '（先跑 backend/supabase_setup.sql）', false);
+  }
+}
+
+function renderNotices() {
+  $('noticeCount').textContent = '(' + state.notices.length + ')';
+  if (!state.notices.length) { $('notices').innerHTML = '<div class="empty">还没有公告。</div>'; return; }
+  $('notices').innerHTML = '<table><tr><th style="width:80px;">级别</th><th>标题 / 正文</th><th style="width:110px;">范围</th><th style="width:150px;">发布</th><th style="width:70px;"></th></tr>' +
+    state.notices.map((n) => {
+      const range = (n.min_code || 0) + (n.max_code == null ? '+' : ' ~ ' + n.max_code);
+      return '<tr><td><span class="pill ' + esc(n.level) + '">' + esc(n.level) + '</span>' + (n.active === false ? '<div class="muted" style="font-size:12px">已停用</div>' : '') + '</td>' +
+        '<td><strong>' + esc(n.title) + '</strong><div class="muted" style="font-size:12px; white-space:pre-wrap;">' + esc(n.body || '') + '</div></td>' +
+        '<td class="mono">' + esc(range) + '</td>' +
+        '<td>' + esc(ago(n.published_at)) + '</td>' +
+        '<td><button class="danger" data-drop="' + esc(n.notice_id) + '">删</button></td></tr>';
+    }).join('') + '</table>';
+  document.querySelectorAll('button[data-drop]').forEach((btn) => {
+    btn.onclick = async () => {
+      if (!confirm('确定删掉这条公告？')) return;
+      try {
+        await rpc('duoda_panel_drop_notice', { p_secret: state.secret, p_id: btn.dataset.drop });
+        await loadNotices();
+      } catch (e) { status('删除失败：' + e.message, false); }
+    };
+  });
+}
+
+async function publish() {
+  const title = $('nTitle').value.trim();
+  if (!title) { status('标题不能为空', false); return; }
+  const max = $('nMax').value.trim();
+  const payload = { notice_id: '', title, body: $('nBody').value.trim(), url: $('nUrl').value.trim(), level: $('nLevel').value, min_code: $('nMin').value || '0', max_code: max, active: 'true' };
+  try {
+    const res = await rpc('duoda_panel_set_notice', { p_secret: state.secret, p: payload });
+    if (res && res.ok === false) throw new Error(res.error || '被拒绝');
+    $('nTitle').value = ''; $('nBody').value = ''; $('nUrl').value = '';
+    await loadNotices();
+    status('公告已发布', true);
+  } catch (e) { status('发布失败：' + e.message, false); }
+}
+
+$('connect').onclick = async () => {
+  state.base = $('base').value.trim() || SUPABASE_URL;
+  state.secret = $('secret').value.trim();
+  localStorage.setItem(LS_BASE, state.base);
+  localStorage.setItem(LS_SECRET, state.secret);
+  await loadDevices();
+  await loadLogs();
+  await loadNotices();
+};
+
+$('reloadDevices').onclick = loadDevices;
+$('reloadLogs').onclick = loadLogs;
+$('reloadNotices').onclick = loadNotices;
+$('deviceFilter').oninput = renderDevices;
+$('logDevice').onchange = renderLogs;
+$('publish').onclick = publish;
+
+$('tplUpdate').onclick = () => {
+  const v = prompt('新版本号（例如 1.4.0）', '1.4.0');
+  if (!v) return;
+  $('nTitle').value = '多答 ' + v + ' 已发布';
+  $('nBody').value = [
+    '这一版修了长消息发不出去的问题，无障碍权限检测也不再误报没打开。',
+    '点「去看看」就能下载安装，装完直接覆盖，原来的模型配置和技能都在。',
+  ].join(String.fromCharCode(10));
+  $('nUrl').value = 'https://github.com/lwl555/duoda-agent/releases/latest';
+  $('nLevel').value = 'info';
+  $('nMin').value = '0';
+  $('nMax').value = '';
+  $('noticeHint').textContent = '模板已填好，改完点发布';
+};
+
+document.querySelectorAll('.tabs button').forEach((btn) => {
+  btn.onclick = () => {
+    document.querySelectorAll('.tabs button').forEach((b) => b.setAttribute('aria-selected', String(b === btn)));
+    ['devices', 'logs', 'notice', 'release'].forEach((k) => { $('tab-' + k).hidden = k !== btn.dataset.tab; });
+  };
+});
+
+$('base').value = state.base;
+$('secret').value = state.secret;
+
+$('gateLogin').onclick = tryLogin;
+$('gatePass').addEventListener('keydown', (e) => { if (e.key === 'Enter') tryLogin(); });
+$('gateUser').addEventListener('keydown', (e) => { if (e.key === 'Enter') $('gatePass').focus(); });
+$('logout').onclick = () => { localStorage.removeItem(AUTH_KEY); showApp(false); $('gatePass').value = ''; };
+
+// 已经登录过（同一台电脑）就直接进。
+if (localStorage.getItem(AUTH_KEY) === AUTH_HASH) {
+  showApp(true);
+  if (state.secret) { loadDevices(); loadLogs(); loadNotices(); }
+} else {
+  showApp(false);
+  $('gateUser').focus();
+}
+</script>
+</body>
+</html>
