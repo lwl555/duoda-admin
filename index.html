@@ -97,6 +97,42 @@
   #gate label.showpass input { width: auto; margin: 0; accent-color: var(--blue); }
   details summary { cursor: pointer; color: var(--blue); font-size: 13px; }
   pre { white-space: pre-wrap; word-break: break-all; margin: 6px 0 0; font-size: 12px; }
+
+  /* ── 手机（≤640px）：表格转卡片，控件放大到手指点得中 ───────────────── */
+  @media (max-width: 640px) {
+    header { padding: 12px 14px; gap: 8px; }
+    header h1 { font-size: 14px; }
+    header .tag { display: none; }
+    header button { margin-left: auto !important; }
+    main { padding: 10px; }
+    .panel { padding: 14px; border-radius: 12px; margin-bottom: 12px; }
+    .row > * { flex: 1 1 100%; }
+    .row > div[style*="flex: 0 0 auto"] { flex: 1 1 100%; align-self: stretch !important; }
+    .row > div[style*="flex: 0 0 auto"] button { width: 100%; }
+    input, select, textarea { font-size: 16px; padding: 10px 12px; }
+    button { min-height: 42px; padding: 10px 14px; font-size: 14px; }
+    .tabs { position: sticky; top: 0; background: var(--bg); padding: 8px 0 10px; z-index: 9;
+      margin: 0 -10px 12px; padding-left: 10px; padding-right: 10px; border-bottom: 1px solid var(--line); }
+    .tabs button { flex: 1 1 auto; min-width: 0; padding: 8px 10px; font-size: 13px; }
+    .cols2 { grid-template-columns: 1fr; }
+    #gate { max-width: none; margin: 4vh 10px 0; }
+    #gate .panel { padding: 18px; }
+
+    /* 表格 → 一张一张的卡片，每格前面带字段名 */
+    table.cards { display: block; font-size: 13px; }
+    table.cards tr:first-child { display: none; }
+    table.cards tr {
+      display: block; background: #fff; border: 1px solid var(--line);
+      border-radius: 10px; padding: 10px 12px; margin-bottom: 10px;
+    }
+    table.cards td { display: block; border: 0; padding: 4px 0; }
+    table.cards td[data-label]::before {
+      content: attr(data-label); display: inline-block; min-width: 58px;
+      color: var(--ink-3); font-size: 12px;
+    }
+    table.cards td:empty { display: none; }
+    table.cards .mono { word-break: break-all; }
+  }
 </style>
 </head>
 <body>
@@ -137,8 +173,10 @@
       </div>
     </div>
     <p class="muted" style="margin:10px 0 0; font-size:12px;">
-      国内网络连不上 <span class="mono">*.supabase.co</span> 时，在地址里填 Cloudflare Worker 代理（只转发 <span class="mono">/rest/v1/*</span>）。
-      密钥只存在这台电脑的 localStorage，不会上传。
+      <strong>留空就是静态快照模式</strong>：读 <span class="mono">github.io/duoda-admin/panel.json</span>，
+      国内直接能开，数据由 GitHub Actions 生成（有几十分钟延迟）。
+      只有在「数据源地址」填了 Worker / 自建代理的地址，才走实时接口。
+      密钥只存在这台设备的 localStorage，不会上传。
     </p>
   </div>
 
@@ -304,6 +342,28 @@ const LS_SECRET = 'duoda.panel.secret';
 const $ = (id) => document.getElementById(id);
 const state = { base: localStorage.getItem(LS_BASE) || SUPABASE_URL, secret: localStorage.getItem(LS_SECRET) || '', devices: [], logs: [], notices: [] };
 
+// ── 静态数据源 ──────────────────────────────────────────────────────────────
+// 国内按域名封 *.supabase.co；workers.dev 又被 DNS 污染（实测解析到 Facebook 的
+// 128.242.250.157），手机上这两条都走不通。所以默认读 GitHub Actions 定时生成的
+// panel.json —— 它和本页同站在 github.io 上，国内实测 0.6 秒。
+// 只有当你在「数据源地址」里填了别的代理（Worker / 自建），才走实时接口。
+const STATIC_BASE = 'https://lwl555.github.io/duoda-admin';
+let _staticCache = null;
+
+/** 填了非 supabase 的地址 = 想走实时接口。 */
+function liveMode() {
+  const b = (state.base || '').replace(/\/+$/, '');
+  return !!b && b !== SUPABASE_URL.replace(/\/+$/, '');
+}
+
+async function staticPanel() {
+  if (_staticCache) return _staticCache;
+  const res = await fetch(STATIC_BASE + '/panel.json?t=' + Date.now(), { cache: 'no-store' });
+  if (!res.ok) throw new Error('panel.json 还没生成（HTTP ' + res.status + '）');
+  _staticCache = await res.json();
+  return _staticCache;
+}
+
 function status(text, ok) {
   const el = $('status');
   el.textContent = text;
@@ -346,12 +406,19 @@ function ago(iso) {
 
 async function loadDevices() {
   try {
-    const rows = await rpc('panel_feed', { p_secret: state.secret });
-    state.devices = Array.isArray(rows) ? rows : [];
+    let tail = '';
+    if (liveMode()) {
+      const rows = await rpc('panel_feed', { p_secret: state.secret });
+      state.devices = Array.isArray(rows) ? rows : [];
+    } else {
+      const snap = await staticPanel();
+      state.devices = Array.isArray(snap.devices) ? snap.devices : [];
+      tail = snap.generated_at ? ' · 快照 ' + ago(snap.generated_at) : '';
+    }
     renderDevices();
     const sel = $('logDevice');
     sel.innerHTML = state.devices.map((d) => '<option value="' + esc(d.device_id) + '">' + esc((d.model || d.device_id) + ' · ' + (d.app_version || '?')) + '</option>').join('');
-    status('设备 ' + state.devices.length + ' 台', true);
+    status('设备 ' + state.devices.length + ' 台' + tail, true);
   } catch (e) {
     status('读设备失败：' + e.message, false);
   }
@@ -362,26 +429,32 @@ function renderDevices() {
   const rows = state.devices.filter((d) => !q || [d.device_id, d.model, d.brand, d.app_version].join(' ').toLowerCase().includes(q));
   $('deviceCount').textContent = '(' + rows.length + ')';
   if (!rows.length) { $('devices').innerHTML = '<div class="empty">还没有设备上报。App 里「设置 → 多答云端 → 立即上报」可以立刻来一条。</div>'; return; }
-  $('devices').innerHTML = '<table><tr><th>设备</th><th>机型</th><th>系统</th><th>版本</th><th>状态</th><th>更新时间</th></tr>' +
+  $('devices').innerHTML = '<table class="cards"><tr><th>设备</th><th>机型</th><th>系统</th><th>版本</th><th>状态</th><th>更新时间</th></tr>' +
     rows.map((d) => {
       const a = d.agent || {};
       const badges = [];
       if (a.autoMode) badges.push('全自动');
       if (a.systemTap) badges.push('弹窗代点');
       if (a.cloud) badges.push(a.cloud === 'proxy' ? '走代理' : '直连');
-      return '<tr><td class="mono">' + esc(d.device_id) + '</td>' +
-        '<td>' + esc(d.model || '-') + '<div class="muted" style="font-size:12px">' + esc(d.brand || '') + '</div></td>' +
-        '<td>Android ' + esc(d.release || '?') + '<div class="muted" style="font-size:12px">SDK ' + esc(d.android || '?') + '</div></td>' +
-        '<td class="mono">' + esc(d.app_version || '?') + ' (' + esc(d.app_code || 0) + ')</td>' +
-        '<td>' + (badges.length ? badges.map((b) => '<span class="pill">' + b + '</span>').join(' ') : '<span class="muted">-</span>') + '</td>' +
-        '<td>' + esc(ago(d.updated_at)) + '</td></tr>';
+      return '<tr>' +
+        '<td class="mono" data-label="设备">' + esc(d.device_id) + '</td>' +
+        '<td data-label="机型">' + esc(d.model || '-') + '<div class="muted" style="font-size:12px">' + esc(d.brand || '') + '</div></td>' +
+        '<td data-label="系统">Android ' + esc(d.release || '?') + '<div class="muted" style="font-size:12px">SDK ' + esc(d.android || '?') + '</div></td>' +
+        '<td class="mono" data-label="版本">' + esc(d.app_version || '?') + ' (' + esc(d.app_code || 0) + ')</td>' +
+        '<td data-label="状态">' + (badges.length ? badges.map((b) => '<span class="pill">' + b + '</span>').join(' ') : '<span class="muted">-</span>') + '</td>' +
+        '<td data-label="更新">' + esc(ago(d.updated_at)) + '</td></tr>';
     }).join('') + '</table>';
 }
 
 async function loadLogs() {
   try {
-    const rows = await rpc('panel_logs', { p_secret: state.secret });
-    state.logs = Array.isArray(rows) ? rows : [];
+    if (liveMode()) {
+      const rows = await rpc('panel_logs', { p_secret: state.secret });
+      state.logs = Array.isArray(rows) ? rows : [];
+    } else {
+      const snap = await staticPanel();
+      state.logs = Array.isArray(snap.logs) ? snap.logs : [];
+    }
     renderLogs();
     status('日志 ' + state.logs.length + ' 台', true);
   } catch (e) {
@@ -395,20 +468,27 @@ function renderLogs() {
   if (!row) { $('logs').innerHTML = '<div class="empty">还没有日志上报。</div>'; return; }
   const entries = Array.isArray(row.entries) ? row.entries.slice().reverse() : [];
   $('logs').innerHTML = '<div class="muted" style="margin-bottom:8px;">' + esc(row.device_id) + ' · ' + esc(row.app_version || '') + ' · ' + entries.length + ' 条 · 更新于 ' + esc(ago(row.updated_at)) + '</div>' +
-    (entries.length ? '<table><tr><th style="width:150px;">时间</th><th style="width:200px;">事件</th><th>数据</th></tr>' +
+    (entries.length ? '<table class="cards"><tr><th style="width:150px;">时间</th><th style="width:200px;">事件</th><th>数据</th></tr>' +
       entries.map((e) => {
         const at = e.at ? new Date(e.at).toLocaleString('zh-CN') : '';
         const data = e.data ? Object.entries(e.data).map(([k, v]) => k + '=' + (typeof v === 'object' ? JSON.stringify(v) : v)).join(' · ') : '';
-        return '<tr><td class="mono">' + esc(at) + '</td><td class="mono">' + esc(e.event) + '</td><td class="muted" style="font-size:12px">' + esc(data) + '</td></tr>';
+        return '<tr><td class="mono" data-label="时间">' + esc(at) + '</td><td class="mono" data-label="事件">' + esc(e.event) + '</td><td class="muted" style="font-size:12px" data-label="数据">' + esc(data) + '</td></tr>';
       }).join('') + '</table>' : '<div class="empty">这台设备没带日志。</div>');
 }
 
 async function loadNotices() {
   try {
-    const rows = await rpc('duoda_panel_notices', { p_secret: state.secret });
-    state.notices = Array.isArray(rows) ? rows : [];
+    let tail = '';
+    if (liveMode()) {
+      const rows = await rpc('duoda_panel_notices', { p_secret: state.secret });
+      state.notices = Array.isArray(rows) ? rows : [];
+    } else {
+      const snap = await staticPanel();
+      state.notices = Array.isArray(snap.notices) ? snap.notices : [];
+      tail = snap.generated_at ? ' · 快照 ' + ago(snap.generated_at) : '';
+    }
     renderNotices();
-    status('公告 ' + state.notices.length + ' 条', true);
+    status('公告 ' + state.notices.length + ' 条' + tail, true);
   } catch (e) {
     // 分清两件事：Failed to fetch / NetworkError 是**网络层**——国内按域名（SNI）
     // 封 *.supabase.co，手机直连连 TLS 都握不上，跟 SQL 一字关系没有。
@@ -424,17 +504,21 @@ async function loadNotices() {
 function renderNotices() {
   $('noticeCount').textContent = '(' + state.notices.length + ')';
   if (!state.notices.length) { $('notices').innerHTML = '<div class="empty">还没有公告。</div>'; return; }
-  $('notices').innerHTML = '<table><tr><th style="width:80px;">级别</th><th>标题 / 正文</th><th style="width:110px;">范围</th><th style="width:150px;">发布</th><th style="width:70px;"></th></tr>' +
+  $('notices').innerHTML = '<table class="cards"><tr><th style="width:80px;">级别</th><th>标题 / 正文</th><th style="width:110px;">范围</th><th style="width:150px;">发布</th><th style="width:70px;"></th></tr>' +
     state.notices.map((n) => {
       const range = (n.min_code || 0) + (n.max_code == null ? '+' : ' ~ ' + n.max_code);
-      return '<tr><td><span class="pill ' + esc(n.level) + '">' + esc(n.level) + '</span>' + (n.active === false ? '<div class="muted" style="font-size:12px">已停用</div>' : '') + '</td>' +
-        '<td><strong>' + esc(n.title) + '</strong><div class="muted" style="font-size:12px; white-space:pre-wrap;">' + esc(n.body || '') + '</div></td>' +
-        '<td class="mono">' + esc(range) + '</td>' +
-        '<td>' + esc(ago(n.published_at)) + '</td>' +
+      return '<tr><td data-label="级别"><span class="pill ' + esc(n.level) + '">' + esc(n.level) + '</span>' + (n.active === false ? '<div class="muted" style="font-size:12px">已停用</div>' : '') + '</td>' +
+        '<td data-label="内容"><strong>' + esc(n.title) + '</strong><div class="muted" style="font-size:12px; white-space:pre-wrap;">' + esc(n.body || '') + '</div></td>' +
+        '<td class="mono" data-label="范围">' + esc(range) + '</td>' +
+        '<td data-label="发布">' + esc(ago(n.published_at)) + '</td>' +
         '<td><button class="danger" data-drop="' + esc(n.notice_id) + '">删</button></td></tr>';
     }).join('') + '</table>';
   document.querySelectorAll('button[data-drop]').forEach((btn) => {
     btn.onclick = async () => {
+      if (!liveMode()) {
+        status('静态快照模式删不了公告。去 GitHub Actions 跑 panel.yml 的 drop 动作。', false);
+        return;
+      }
       if (!confirm('确定删掉这条公告？')) return;
       try {
         await rpc('duoda_panel_drop_notice', { p_secret: state.secret, p_id: btn.dataset.drop });
@@ -447,6 +531,10 @@ function renderNotices() {
 async function publish() {
   const title = $('nTitle').value.trim();
   if (!title) { status('标题不能为空', false); return; }
+  if (!liveMode()) {
+    status('现在是静态快照模式，发不了公告。去 GitHub Actions 跑 panel.yml 的 notice 动作（海外机器代发，国内可用）。', false);
+    return;
+  }
   const max = $('nMax').value.trim();
   const payload = { notice_id: '', title, body: $('nBody').value.trim(), url: $('nUrl').value.trim(), level: $('nLevel').value, min_code: $('nMin').value || '0', max_code: max, active: 'true' };
   try {
@@ -463,6 +551,7 @@ $('connect').onclick = async () => {
   state.secret = $('secret').value.trim();
   localStorage.setItem(LS_BASE, state.base);
   localStorage.setItem(LS_SECRET, state.secret);
+  _staticCache = null;
   await loadDevices();
   await loadLogs();
   await loadNotices();
