@@ -511,7 +511,7 @@ function renderNotices() {
         '<td data-label="内容"><strong>' + esc(n.title) + '</strong><div class="muted" style="font-size:12px; white-space:pre-wrap;">' + esc(n.body || '') + '</div></td>' +
         '<td class="mono" data-label="范围">' + esc(range) + '</td>' +
         '<td data-label="发布">' + esc(ago(n.published_at)) + '</td>' +
-        '<td><button class="danger" data-drop="' + esc(n.notice_id) + '">删</button></td></tr>';
+        '<td data-label="操作"><button class="danger" data-drop="' + esc(n.notice_id) + '">删</button></td></tr>';
     }).join('') + '</table>';
   document.querySelectorAll('button[data-drop]').forEach((btn) => {
     btn.onclick = async () => {
