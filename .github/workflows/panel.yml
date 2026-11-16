@@ -35,7 +35,7 @@ on:
         required: false
         default: 'update'
       notice_id:
-        description: '撤公告时填 notice_id，留空则撤回全部'
+        description: 'notice=改这条公告（留空=新建一条）；drop=撤这条（留空=撤回全部）'
         required: false
         default: ''
 
@@ -74,8 +74,10 @@ jobs:
 
           case "$ACT" in
             notice)
-              payload=$(jq -n --arg t "$TITLE" --arg b "$BODY" --arg u "$URL" --arg l "$LEVEL" \
-                '{p_secret: env.SECRET, p: {title:$t, body:$b, url:$u, level:$l}}')
+              # notice_id 传了就是改那一条（同 id 覆盖），不传才新建。
+              # 少了这个参数，改一条公告会变成多出一条，客户会看到两份。
+              payload=$(jq -n --arg t "$TITLE" --arg b "$BODY" --arg u "$URL" --arg l "$LEVEL" --arg id "$NID" \
+                '{p_secret: env.SECRET, p: ({title:$t, body:$b, url:$u, level:$l} + (if $id == "" then {} else {notice_id:$id} end))}')
               echo "::group::发公告"
               curl -sS --fail-with-body -X POST "${hdr[@]}" "$BASE/rest/v1/rpc/duoda_panel_set_notice" -d "$payload"
               echo; echo "::endgroup::"
