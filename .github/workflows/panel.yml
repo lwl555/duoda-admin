@@ -172,6 +172,43 @@ jobs:
 
           token = os.environ['GH_TOKEN']
 
+          # 版本历史：App 的「更新详情」页读 releases.json（读不到就自己问 API）。
+          # 每 6 小时抄一份，国内不用每次去撞 api.github.com 的限额。
+          releases = None
+          try:
+              rel_api = 'https://api.github.com/repos/lwl555/duoda-agent/releases?per_page=30'
+              rel_req = urllib.request.Request(rel_api)
+              rel_req.add_header('Authorization', 'token ' + token)
+              rel_req.add_header('Accept', 'application/vnd.github+json')
+              raw_rel = json.loads(urllib.request.urlopen(rel_req, timeout=30).read())
+              releases = []
+              for r in raw_rel:
+                  if r.get('draft'):
+                      continue
+                  tag = (r.get('tag_name') or '').strip()
+                  version = tag.lstrip('vV')
+                  if not version:
+                      continue
+                  size, sha = None, None
+                  for a in r.get('assets') or []:
+                      if (a.get('name') or '').endswith('-arm64.apk'):
+                          size = a.get('size')
+                          sha = (a.get('digest') or '').replace('sha256:', '') or None
+                          break
+                  releases.append({
+                      'version': version,
+                      'tag': tag,
+                      'title': (r.get('name') or '').strip(),
+                      'notes': (r.get('body') or '').replace('\r\n', '\n'),
+                      'publishedAt': r.get('published_at'),
+                      'page': r.get('html_url'),
+                      'size': size,
+                      'sha256': sha,
+                  })
+              print('releases:%d' % len(releases))
+          except Exception as e:
+              print('::warning::版本历史拉取失败：%s' % e)
+
           def push(path, text):
               api = 'https://api.github.com/repos/lwl555/duoda-admin/contents/' + path
               req = urllib.request.Request(api)
@@ -197,6 +234,9 @@ jobs:
 
           push('notices.json', notices_text)
           push('panel.json', snap_text)
+          if releases is not None:
+              push('releases.json', json.dumps({'generated_at': now, 'releases': releases},
+                                              ensure_ascii=False, indent=1))
           print('done at', now)
           PY
 
