@@ -1,5 +1,5 @@
 {
- "generated_at": "2026-11-16T00:25:51Z",
+ "generated_at": "2026-11-16T00:34:53Z",
  "devices": [
   {
    "device_id": "probe_insert_1",
@@ -50,16 +50,6 @@
    "min_code": 0,
    "max_code": null,
    "published_at": "2026-11-16T00:25:49.275182+00:00"
-  },
-  {
-   "notice_id": "n-1794772752",
-   "title": "多答 1.4.2 已发布",
-   "body": "这一版把公告和「远程推送更新」在国内彻底打通了。\n点「去看看」下载安装，直接覆盖，原来的模型配置和技能都还在。",
-   "level": "update",
-   "url": "https://github.com/lwl555/duoda-agent/releases/latest",
-   "min_code": 0,
-   "max_code": null,
-   "published_at": "2026-11-15T19:59:11.572092+00:00"
   }
  ]
 }
