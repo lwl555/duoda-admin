@@ -1,15 +1,15 @@
 {
- "generated_at": "2026-11-16T04:40:25Z",
+ "generated_at": "2026-11-16T14:43:50Z",
  "devices": [
   {
-   "device_id": "3557903183297f12629e43175521fb2a",
+   "device_id": "bda4836b39e5399323fa9048d60a946e",
    "model": null,
    "brand": null,
    "android": 0,
-   "release": "PJZ110_17.0.0.103(CN01)",
+   "release": "PKQ1.181030.001 release-keys",
    "abi": null,
-   "app_version": "1.4.3",
-   "app_code": 7,
+   "app_version": "1.4.6",
+   "app_code": 10,
    "agent": {
     "name": "多答 Agent",
     "cards": true,
@@ -29,7 +29,367 @@
    "location_at": null,
    "satellites": null,
    "location_granted": null,
-   "updated_at": "2026-11-16T01:59:57.622532+00:00"
+   "updated_at": "2026-11-16T13:34:53.313922+00:00"
+  },
+  {
+   "device_id": "1450f0d3d1c5ff6686e4ac717fcb485a",
+   "model": null,
+   "brand": null,
+   "android": 0,
+   "release": "JDY-AN00 8.0.0.219(C00E200R6P3)",
+   "abi": null,
+   "app_version": "1.4.6",
+   "app_code": 10,
+   "agent": {
+    "name": "多答 Agent",
+    "cards": true,
+    "cloud": "direct",
+    "skills": {
+     "autoInvoke": true
+    },
+    "autoMode": true,
+    "systemTap": false
+   },
+   "apps": [],
+   "apps_count": 0,
+   "lat": null,
+   "lng": null,
+   "location_source": null,
+   "location_accuracy": null,
+   "location_at": null,
+   "satellites": null,
+   "location_granted": null,
+   "updated_at": "2026-11-16T13:34:35.958813+00:00"
+  },
+  {
+   "device_id": "6065f1bbdba5ffa7ad759a0b100de5a4",
+   "model": null,
+   "brand": null,
+   "android": 0,
+   "release": "PD2121_A_6.18.8",
+   "abi": null,
+   "app_version": "1.4.6",
+   "app_code": 10,
+   "agent": {
+    "name": "多答 Agent",
+    "cards": true,
+    "cloud": "direct",
+    "skills": {
+     "autoInvoke": true
+    },
+    "autoMode": true,
+    "systemTap": false
+   },
+   "apps": [],
+   "apps_count": 0,
+   "lat": null,
+   "lng": null,
+   "location_source": null,
+   "location_accuracy": null,
+   "location_at": null,
+   "satellites": null,
+   "location_granted": null,
+   "updated_at": "2026-11-16T12:15:28.866415+00:00"
+  },
+  {
+   "device_id": "e49b4db31a95e57c149bfe7fccf5c196",
+   "model": null,
+   "brand": null,
+   "android": 0,
+   "release": "PD2121_A_6.18.8",
+   "abi": null,
+   "app_version": "1.4.6",
+   "app_code": 10,
+   "agent": {
+    "name": "多答 Agent",
+    "cards": true,
+    "cloud": "direct",
+    "skills": {
+     "autoInvoke": true
+    },
+    "autoMode": true,
+    "systemTap": false
+   },
+   "apps": [],
+   "apps_count": 0,
+   "lat": null,
+   "lng": null,
+   "location_source": null,
+   "location_accuracy": null,
+   "location_at": null,
+   "satellites": null,
+   "location_granted": null,
+   "updated_at": "2026-11-16T12:01:42.068716+00:00"
+  },
+  {
+   "device_id": "83d9dc6973f94b96c15c15b0c8fc7589",
+   "model": null,
+   "brand": null,
+   "android": 0,
+   "release": "PD2121_A_6.18.8",
+   "abi": null,
+   "app_version": "1.4.6",
+   "app_code": 10,
+   "agent": {
+    "name": "多答 Agent",
+    "cards": true,
+    "cloud": "direct",
+    "skills": {
+     "autoInvoke": true
+    },
+    "autoMode": true,
+    "systemTap": false
+   },
+   "apps": [],
+   "apps_count": 0,
+   "lat": null,
+   "lng": null,
+   "location_source": null,
+   "location_accuracy": null,
+   "location_at": null,
+   "satellites": null,
+   "location_granted": null,
+   "updated_at": "2026-11-16T11:59:46.463969+00:00"
+  },
+  {
+   "device_id": "1642330eba961dca2f24113e0e108443",
+   "model": null,
+   "brand": null,
+   "android": 0,
+   "release": "PKQ1.181030.001 release-keys",
+   "abi": null,
+   "app_version": "1.4.6",
+   "app_code": 10,
+   "agent": {
+    "name": "多答 Agent",
+    "cards": true,
+    "cloud": "direct",
+    "skills": {
+     "autoInvoke": true
+    },
+    "autoMode": true,
+    "systemTap": false
+   },
+   "apps": [],
+   "apps_count": 0,
+   "lat": null,
+   "lng": null,
+   "location_source": null,
+   "location_accuracy": null,
+   "location_at": null,
+   "satellites": null,
+   "location_granted": null,
+   "updated_at": "2026-11-16T11:39:14.615899+00:00"
+  },
+  {
+   "device_id": "3557903183297f12629e43175521fb2a",
+   "model": null,
+   "brand": null,
+   "android": 0,
+   "release": "PJZ110_17.0.0.103(CN01)",
+   "abi": null,
+   "app_version": "1.4.6",
+   "app_code": 10,
+   "agent": {
+    "name": "多答 Agent",
+    "cards": true,
+    "cloud": "direct",
+    "skills": {
+     "autoInvoke": false
+    },
+    "autoMode": true,
+    "systemTap": true
+   },
+   "apps": [],
+   "apps_count": 0,
+   "lat": null,
+   "lng": null,
+   "location_source": null,
+   "location_accuracy": null,
+   "location_at": null,
+   "satellites": null,
+   "location_granted": null,
+   "updated_at": "2026-11-16T11:15:00.21256+00:00"
+  },
+  {
+   "device_id": "b19f832785df76be5fd5477cdebc4c1b",
+   "model": null,
+   "brand": null,
+   "android": 0,
+   "release": "UKQ1.230804.001 release-keys",
+   "abi": null,
+   "app_version": "1.4.6",
+   "app_code": 10,
+   "agent": {
+    "name": "多答 Agent",
+    "cards": true,
+    "cloud": "direct",
+    "skills": {
+     "autoInvoke": true
+    },
+    "autoMode": true,
+    "systemTap": false
+   },
+   "apps": [],
+   "apps_count": 0,
+   "lat": null,
+   "lng": null,
+   "location_source": null,
+   "location_accuracy": null,
+   "location_at": null,
+   "satellites": null,
+   "location_granted": null,
+   "updated_at": "2026-11-16T10:32:10.075603+00:00"
+  },
+  {
+   "device_id": "284abafe62ab0237c1a129c00f19fb3f",
+   "model": null,
+   "brand": null,
+   "android": 0,
+   "release": "R11_11_A.54_200528",
+   "abi": null,
+   "app_version": "1.4.6",
+   "app_code": 10,
+   "agent": {
+    "name": "多答 Agent",
+    "cards": true,
+    "cloud": "direct",
+    "skills": {
+     "autoInvoke": true
+    },
+    "autoMode": true,
+    "systemTap": false
+   },
+   "apps": [],
+   "apps_count": 0,
+   "lat": null,
+   "lng": null,
+   "location_source": null,
+   "location_accuracy": null,
+   "location_at": null,
+   "satellites": null,
+   "location_granted": null,
+   "updated_at": "2026-11-16T10:27:57.924754+00:00"
+  },
+  {
+   "device_id": "11987a9b498a4a466fd12c11de8bfaca",
+   "model": null,
+   "brand": null,
+   "android": 0,
+   "release": "PCHM10_11_F.12",
+   "abi": null,
+   "app_version": "1.4.6",
+   "app_code": 10,
+   "agent": {
+    "name": "多答 Agent",
+    "cards": true,
+    "cloud": "direct",
+    "skills": {
+     "autoInvoke": true
+    },
+    "autoMode": true,
+    "systemTap": false
+   },
+   "apps": [],
+   "apps_count": 0,
+   "lat": null,
+   "lng": null,
+   "location_source": null,
+   "location_accuracy": null,
+   "location_at": null,
+   "satellites": null,
+   "location_granted": null,
+   "updated_at": "2026-11-16T10:16:46.780874+00:00"
+  },
+  {
+   "device_id": "b9664eec14faf9ee5ebb9e3e9f8e9f55",
+   "model": null,
+   "brand": null,
+   "android": 0,
+   "release": "TKQ1.221114.001 test-keys",
+   "abi": null,
+   "app_version": "1.4.6",
+   "app_code": 10,
+   "agent": {
+    "name": "多答 Agent",
+    "cards": true,
+    "cloud": "direct",
+    "skills": {
+     "autoInvoke": true
+    },
+    "autoMode": true,
+    "systemTap": false
+   },
+   "apps": [],
+   "apps_count": 0,
+   "lat": null,
+   "lng": null,
+   "location_source": null,
+   "location_accuracy": null,
+   "location_at": null,
+   "satellites": null,
+   "location_granted": null,
+   "updated_at": "2026-11-16T10:12:34.975858+00:00"
+  },
+  {
+   "device_id": "10155c3b6a91691ba83f14840a90328a",
+   "model": null,
+   "brand": null,
+   "android": 0,
+   "release": "PD2352C_A_16.2.17.0.W10",
+   "abi": null,
+   "app_version": "1.4.6",
+   "app_code": 10,
+   "agent": {
+    "name": "多答 Agent",
+    "cards": true,
+    "cloud": "direct",
+    "skills": {
+     "autoInvoke": true
+    },
+    "autoMode": true,
+    "systemTap": false
+   },
+   "apps": [],
+   "apps_count": 0,
+   "lat": null,
+   "lng": null,
+   "location_source": null,
+   "location_accuracy": null,
+   "location_at": null,
+   "satellites": null,
+   "location_granted": null,
+   "updated_at": "2026-11-16T10:10:15.693918+00:00"
+  },
+  {
+   "device_id": "2307a72d4e22c263a8883bd835b56f02",
+   "model": null,
+   "brand": null,
+   "android": 0,
+   "release": "PD2353_A_14.0.14.16.W10.V000L1",
+   "abi": null,
+   "app_version": "1.4.6",
+   "app_code": 10,
+   "agent": {
+    "name": "多答 Agent",
+    "cards": true,
+    "cloud": "direct",
+    "skills": {
+     "autoInvoke": true
+    },
+    "autoMode": true,
+    "systemTap": false
+   },
+   "apps": [],
+   "apps_count": 0,
+   "lat": null,
+   "lng": null,
+   "location_source": null,
+   "location_accuracy": null,
+   "location_at": null,
+   "satellites": null,
+   "location_granted": null,
+   "updated_at": "2026-11-16T10:10:06.012618+00:00"
   },
   {
    "device_id": "b50e3bd7c39cb9bf3fb7ee8a7ece7e6f",
@@ -59,7 +419,37 @@
    "location_at": null,
    "satellites": null,
    "location_granted": null,
-   "updated_at": "2026-11-16T01:59:52.646314+00:00"
+   "updated_at": "2026-11-16T10:00:34.281914+00:00"
+  },
+  {
+   "device_id": "a4ca21d95f29265b4ca4b7a1a4fc3fdf",
+   "model": null,
+   "brand": null,
+   "android": 0,
+   "release": "PKB110_17.0.0.120(CN01)",
+   "abi": null,
+   "app_version": "1.4.3",
+   "app_code": 7,
+   "agent": {
+    "name": "多答 Agent",
+    "cards": true,
+    "cloud": "direct",
+    "skills": {
+     "autoInvoke": true
+    },
+    "autoMode": true,
+    "systemTap": false
+   },
+   "apps": [],
+   "apps_count": 0,
+   "lat": null,
+   "lng": null,
+   "location_source": null,
+   "location_accuracy": null,
+   "location_at": null,
+   "satellites": null,
+   "location_granted": null,
+   "updated_at": "2026-11-16T06:28:03.383362+00:00"
   },
   {
    "device_id": "62e607105fc261db4491852636662f04",
@@ -148,9 +538,143 @@
  ],
  "logs": [
   {
-   "device_id": "3557903183297f12629e43175521fb2a",
-   "app_version": "1.4.3",
+   "device_id": "bda4836b39e5399323fa9048d60a946e",
+   "app_version": "1.4.6",
    "count": 1,
+   "entries": [
+    {
+     "at": 1794836096186,
+     "data": {
+      "version": "1.4.6+10"
+     },
+     "event": "app.start"
+    }
+   ],
+   "updated_at": "2026-11-16T13:34:54.178211+00:00"
+  },
+  {
+   "device_id": "1450f0d3d1c5ff6686e4ac717fcb485a",
+   "app_version": "1.4.6",
+   "count": 4,
+   "entries": [
+    {
+     "at": 1794831144620,
+     "data": {
+      "version": "1.4.6+10"
+     },
+     "event": "app.start"
+    },
+    {
+     "at": 1794831148581,
+     "data": {
+      "ok": true,
+      "logs": true
+     },
+     "event": "cloud.report"
+    },
+    {
+     "at": 1794831149563,
+     "data": {
+      "count": 1
+     },
+     "event": "notice.shown"
+    },
+    {
+     "at": 1794836072627,
+     "data": {
+      "version": "1.4.6+10"
+     },
+     "event": "app.start"
+    }
+   ],
+   "updated_at": "2026-11-16T13:34:37.84771+00:00"
+  },
+  {
+   "device_id": "6065f1bbdba5ffa7ad759a0b100de5a4",
+   "app_version": "1.4.6",
+   "count": 4,
+   "entries": [
+    {
+     "at": 1794824373467,
+     "data": {
+      "version": "1.4.6+10"
+     },
+     "event": "app.start"
+    },
+    {
+     "at": 1794824375090,
+     "data": {
+      "ok": true,
+      "logs": true
+     },
+     "event": "cloud.report"
+    },
+    {
+     "at": 1794824378218,
+     "data": {
+      "count": 1
+     },
+     "event": "notice.shown"
+    },
+    {
+     "at": 1794831327345,
+     "data": {
+      "version": "1.4.6+10"
+     },
+     "event": "app.start"
+    }
+   ],
+   "updated_at": "2026-11-16T12:15:30.156851+00:00"
+  },
+  {
+   "device_id": "e49b4db31a95e57c149bfe7fccf5c196",
+   "app_version": "1.4.6",
+   "count": 1,
+   "entries": [
+    {
+     "at": 1794830500122,
+     "data": {
+      "version": "1.4.6+10"
+     },
+     "event": "app.start"
+    }
+   ],
+   "updated_at": "2026-11-16T12:01:43.375146+00:00"
+  },
+  {
+   "device_id": "83d9dc6973f94b96c15c15b0c8fc7589",
+   "app_version": "1.4.6",
+   "count": 1,
+   "entries": [
+    {
+     "at": 1794830383521,
+     "data": {
+      "version": "1.4.6+10"
+     },
+     "event": "app.start"
+    }
+   ],
+   "updated_at": "2026-11-16T11:59:48.632865+00:00"
+  },
+  {
+   "device_id": "1642330eba961dca2f24113e0e108443",
+   "app_version": "1.4.6",
+   "count": 1,
+   "entries": [
+    {
+     "at": 1794829156269,
+     "data": {
+      "version": "1.4.6+10"
+     },
+     "event": "app.start"
+    }
+   ],
+   "updated_at": "2026-11-16T11:39:15.587034+00:00"
+  },
+  {
+   "device_id": "3557903183297f12629e43175521fb2a",
+   "app_version": "1.4.6",
+   "count": 11,
    "entries": [
     {
      "at": 1794794395782,
@@ -158,14 +682,259 @@
       "version": "1.4.3+7"
      },
      "event": "app.start"
+    },
+    {
+     "at": 1794794397864,
+     "data": {
+      "ok": true,
+      "logs": true
+     },
+     "event": "cloud.report"
+    },
+    {
+     "at": 1794794400654,
+     "data": {
+      "count": 1
+     },
+     "event": "notice.shown"
+    },
+    {
+     "at": 1794823262857,
+     "data": {
+      "version": "1.4.3+7"
+     },
+     "event": "app.start"
+    },
+    {
+     "at": 1794823265446,
+     "data": {
+      "ok": true,
+      "logs": true
+     },
+     "event": "cloud.report"
+    },
+    {
+     "at": 1794823267961,
+     "data": {
+      "count": 1
+     },
+     "event": "notice.shown"
+    },
+    {
+     "at": 1794823319705,
+     "data": {
+      "version": "1.4.3+7"
+     },
+     "event": "app.start"
+    },
+    {
+     "at": 1794823322667,
+     "data": {
+      "ok": true,
+      "logs": true
+     },
+     "event": "cloud.report"
+    },
+    {
+     "at": 1794825574590,
+     "data": {
+      "version": "1.4.6+10"
+     },
+     "event": "app.start"
+    },
+    {
+     "at": 1794825576727,
+     "data": {
+      "ok": true,
+      "logs": true
+     },
+     "event": "cloud.report"
+    },
+    {
+     "at": 1794827697993,
+     "data": {
+      "version": "1.4.6+10"
+     },
+     "event": "app.start"
     }
    ],
-   "updated_at": "2026-11-16T01:59:58.480586+00:00"
+   "updated_at": "2026-11-16T11:15:01.466052+00:00"
+  },
+  {
+   "device_id": "b19f832785df76be5fd5477cdebc4c1b",
+   "app_version": "1.4.6",
+   "count": 6,
+   "entries": [
+    {
+     "at": 1794823587227,
+     "data": {
+      "version": "1.4.6+10"
+     },
+     "event": "app.start"
+    },
+    {
+     "at": 1794823589474,
+     "data": {
+      "ok": true,
+      "logs": true
+     },
+     "event": "cloud.report"
+    },
+    {
+     "at": 1794823592131,
+     "data": {
+      "count": 1
+     },
+     "event": "notice.shown"
+    },
+    {
+     "at": 1794824248816,
+     "data": {
+      "version": "1.4.6+10"
+     },
+     "event": "app.start"
+    },
+    {
+     "at": 1794824250511,
+     "data": {
+      "ok": true,
+      "logs": true
+     },
+     "event": "cloud.report"
+    },
+    {
+     "at": 1794825129236,
+     "data": {
+      "version": "1.4.6+10"
+     },
+     "event": "app.start"
+    }
+   ],
+   "updated_at": "2026-11-16T10:32:10.575316+00:00"
+  },
+  {
+   "device_id": "284abafe62ab0237c1a129c00f19fb3f",
+   "app_version": "1.4.6",
+   "count": 4,
+   "entries": [
+    {
+     "at": 1794824774376,
+     "data": {
+      "version": "1.4.6+10"
+     },
+     "event": "app.start"
+    },
+    {
+     "at": 1794824776538,
+     "data": {
+      "ok": true,
+      "logs": true
+     },
+     "event": "cloud.report"
+    },
+    {
+     "at": 1794824779150,
+     "data": {
+      "count": 1
+     },
+     "event": "notice.shown"
+    },
+    {
+     "at": 1794824877356,
+     "data": {
+      "version": "1.4.6+10"
+     },
+     "event": "app.start"
+    }
+   ],
+   "updated_at": "2026-11-16T10:27:58.726942+00:00"
+  },
+  {
+   "device_id": "11987a9b498a4a466fd12c11de8bfaca",
+   "app_version": "1.4.6",
+   "count": 1,
+   "entries": [
+    {
+     "at": 1794824206898,
+     "data": {
+      "version": "1.4.6+10"
+     },
+     "event": "app.start"
+    }
+   ],
+   "updated_at": "2026-11-16T10:16:47.746245+00:00"
+  },
+  {
+   "device_id": "b9664eec14faf9ee5ebb9e3e9f8e9f55",
+   "app_version": "1.4.6",
+   "count": 1,
+   "entries": [
+    {
+     "at": 1794823953413,
+     "data": {
+      "version": "1.4.6+10"
+     },
+     "event": "app.start"
+    }
+   ],
+   "updated_at": "2026-11-16T10:12:35.922686+00:00"
+  },
+  {
+   "device_id": "10155c3b6a91691ba83f14840a90328a",
+   "app_version": "1.4.6",
+   "count": 1,
+   "entries": [
+    {
+     "at": 1794823814672,
+     "data": {
+      "version": "1.4.6+10"
+     },
+     "event": "app.start"
+    }
+   ],
+   "updated_at": "2026-11-16T10:10:16.602958+00:00"
+  },
+  {
+   "device_id": "2307a72d4e22c263a8883bd835b56f02",
+   "app_version": "1.4.6",
+   "count": 4,
+   "entries": [
+    {
+     "at": 1794823272990,
+     "data": {
+      "version": "1.4.3+7"
+     },
+     "event": "app.start"
+    },
+    {
+     "at": 1794823275053,
+     "data": {
+      "ok": true,
+      "logs": true
+     },
+     "event": "cloud.report"
+    },
+    {
+     "at": 1794823278075,
+     "data": {
+      "count": 1
+     },
+     "event": "notice.shown"
+    },
+    {
+     "at": 1794823805117,
+     "data": {
+      "version": "1.4.6+10"
+     },
+     "event": "app.start"
+    }
+   ],
+   "updated_at": "2026-11-16T10:10:07.08332+00:00"
   },
   {
    "device_id": "b50e3bd7c39cb9bf3fb7ee8a7ece7e6f",
    "app_version": "1.4.4",
-   "count": 16,
+   "count": 19,
    "entries": [
     {
      "at": 1794791516955,
@@ -284,9 +1053,68 @@
       "version": "1.4.4+8"
      },
      "event": "app.start"
+    },
+    {
+     "at": 1794794393056,
+     "data": {
+      "ok": true,
+      "logs": true
+     },
+     "event": "cloud.report"
+    },
+    {
+     "at": 1794794396126,
+     "data": {
+      "count": 1
+     },
+     "event": "notice.shown"
+    },
+    {
+     "at": 1794823232975,
+     "data": {
+      "version": "1.4.4+8"
+     },
+     "event": "app.start"
     }
    ],
-   "updated_at": "2026-11-16T01:59:53.440008+00:00"
+   "updated_at": "2026-11-16T10:00:35.4491+00:00"
+  },
+  {
+   "device_id": "a4ca21d95f29265b4ca4b7a1a4fc3fdf",
+   "app_version": "1.4.3",
+   "count": 4,
+   "entries": [
+    {
+     "at": 1794809992583,
+     "data": {
+      "version": "1.4.3+7"
+     },
+     "event": "app.start"
+    },
+    {
+     "at": 1794809995547,
+     "data": {
+      "ok": true,
+      "logs": true
+     },
+     "event": "cloud.report"
+    },
+    {
+     "at": 1794809997579,
+     "data": {
+      "count": 1
+     },
+     "event": "notice.shown"
+    },
+    {
+     "at": 1794810481861,
+     "data": {
+      "version": "1.4.3+7"
+     },
+     "event": "app.start"
+    }
+   ],
+   "updated_at": "2026-11-16T06:28:04.17426+00:00"
   },
   {
    "device_id": "62e607105fc261db4491852636662f04",
