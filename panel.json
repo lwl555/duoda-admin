@@ -1,6 +1,96 @@
 {
- "generated_at": "2026-11-18T00:29:48Z",
+ "generated_at": "2026-11-18T15:04:10Z",
  "devices": [
+  {
+   "device_id": "3557903183297f12629e43175521fb2a",
+   "model": null,
+   "brand": null,
+   "android": 0,
+   "release": "PJZ110_17.0.0.103(CN01)",
+   "abi": null,
+   "app_version": "1.4.6",
+   "app_code": 10,
+   "agent": {
+    "name": "多答 Agent",
+    "cards": true,
+    "cloud": "direct",
+    "skills": {
+     "autoInvoke": false
+    },
+    "autoMode": true,
+    "systemTap": true
+   },
+   "apps": [],
+   "apps_count": 0,
+   "lat": null,
+   "lng": null,
+   "location_source": null,
+   "location_accuracy": null,
+   "location_at": null,
+   "satellites": null,
+   "location_granted": null,
+   "updated_at": "2026-11-18T09:50:44.191194+00:00"
+  },
+  {
+   "device_id": "540c1815517c3a1f1b20513b32d7d866",
+   "model": null,
+   "brand": null,
+   "android": 0,
+   "release": "RMX3031_13.1.0.500(CN01)",
+   "abi": null,
+   "app_version": "1.4.6",
+   "app_code": 10,
+   "agent": {
+    "name": "多答 Agent",
+    "cards": true,
+    "cloud": "direct",
+    "skills": {
+     "autoInvoke": false
+    },
+    "autoMode": true,
+    "systemTap": true
+   },
+   "apps": [],
+   "apps_count": 0,
+   "lat": null,
+   "lng": null,
+   "location_source": null,
+   "location_accuracy": null,
+   "location_at": null,
+   "satellites": null,
+   "location_granted": null,
+   "updated_at": "2026-11-18T08:05:48.508043+00:00"
+  },
+  {
+   "device_id": "cb3d405ba49c35f3af5c96eb2867f3ee",
+   "model": null,
+   "brand": null,
+   "android": 0,
+   "release": "PD2121_A_6.18.8",
+   "abi": null,
+   "app_version": "1.4.6",
+   "app_code": 10,
+   "agent": {
+    "name": "多答 Agent",
+    "cards": true,
+    "cloud": "direct",
+    "skills": {
+     "autoInvoke": true
+    },
+    "autoMode": true,
+    "systemTap": false
+   },
+   "apps": [],
+   "apps_count": 0,
+   "lat": null,
+   "lng": null,
+   "location_source": null,
+   "location_accuracy": null,
+   "location_at": null,
+   "satellites": null,
+   "location_granted": null,
+   "updated_at": "2026-11-18T02:01:42.124822+00:00"
+  },
   {
    "device_id": "a4ca21d95f29265b4ca4b7a1a4fc3fdf",
    "model": null,
@@ -120,66 +210,6 @@
    "satellites": null,
    "location_granted": null,
    "updated_at": "2026-11-17T10:35:26.658658+00:00"
-  },
-  {
-   "device_id": "540c1815517c3a1f1b20513b32d7d866",
-   "model": null,
-   "brand": null,
-   "android": 0,
-   "release": "RMX3031_13.1.0.500(CN01)",
-   "abi": null,
-   "app_version": "1.4.6",
-   "app_code": 10,
-   "agent": {
-    "name": "多答 Agent",
-    "cards": true,
-    "cloud": "direct",
-    "skills": {
-     "autoInvoke": false
-    },
-    "autoMode": true,
-    "systemTap": true
-   },
-   "apps": [],
-   "apps_count": 0,
-   "lat": null,
-   "lng": null,
-   "location_source": null,
-   "location_accuracy": null,
-   "location_at": null,
-   "satellites": null,
-   "location_granted": null,
-   "updated_at": "2026-11-17T09:57:43.136638+00:00"
-  },
-  {
-   "device_id": "3557903183297f12629e43175521fb2a",
-   "model": null,
-   "brand": null,
-   "android": 0,
-   "release": "PJZ110_17.0.0.103(CN01)",
-   "abi": null,
-   "app_version": "1.4.6",
-   "app_code": 10,
-   "agent": {
-    "name": "多答 Agent",
-    "cards": true,
-    "cloud": "direct",
-    "skills": {
-     "autoInvoke": false
-    },
-    "autoMode": true,
-    "systemTap": true
-   },
-   "apps": [],
-   "apps_count": 0,
-   "lat": null,
-   "lng": null,
-   "location_source": null,
-   "location_accuracy": null,
-   "location_at": null,
-   "satellites": null,
-   "location_granted": null,
-   "updated_at": "2026-11-17T09:30:26.90423+00:00"
   },
   {
    "device_id": "6065f1bbdba5ffa7ad759a0b100de5a4",
@@ -962,36 +992,6 @@
    "updated_at": "2026-11-16T01:59:13.11611+00:00"
   },
   {
-   "device_id": "cb3d405ba49c35f3af5c96eb2867f3ee",
-   "model": null,
-   "brand": null,
-   "android": 0,
-   "release": "PD2121_A_6.18.8",
-   "abi": null,
-   "app_version": "1.4.4",
-   "app_code": 8,
-   "agent": {
-    "name": "多答 Agent",
-    "cards": true,
-    "cloud": "direct",
-    "skills": {
-     "autoInvoke": true
-    },
-    "autoMode": true,
-    "systemTap": false
-   },
-   "apps": [],
-   "apps_count": 0,
-   "lat": null,
-   "lng": null,
-   "location_source": null,
-   "location_accuracy": null,
-   "location_at": null,
-   "satellites": null,
-   "location_granted": null,
-   "updated_at": "2026-11-16T01:57:54.470687+00:00"
-  },
-  {
    "device_id": "probe_insert_1",
    "model": "v1.4.0-selftest",
    "brand": "duoda",
@@ -1017,6 +1017,475 @@
   }
  ],
  "logs": [
+  {
+   "device_id": "3557903183297f12629e43175521fb2a",
+   "app_version": "1.4.6",
+   "count": 23,
+   "entries": [
+    {
+     "at": 1794794395782,
+     "data": {
+      "version": "1.4.3+7"
+     },
+     "event": "app.start"
+    },
+    {
+     "at": 1794794397864,
+     "data": {
+      "ok": true,
+      "logs": true
+     },
+     "event": "cloud.report"
+    },
+    {
+     "at": 1794794400654,
+     "data": {
+      "count": 1
+     },
+     "event": "notice.shown"
+    },
+    {
+     "at": 1794823262857,
+     "data": {
+      "version": "1.4.3+7"
+     },
+     "event": "app.start"
+    },
+    {
+     "at": 1794823265446,
+     "data": {
+      "ok": true,
+      "logs": true
+     },
+     "event": "cloud.report"
+    },
+    {
+     "at": 1794823267961,
+     "data": {
+      "count": 1
+     },
+     "event": "notice.shown"
+    },
+    {
+     "at": 1794823319705,
+     "data": {
+      "version": "1.4.3+7"
+     },
+     "event": "app.start"
+    },
+    {
+     "at": 1794823322667,
+     "data": {
+      "ok": true,
+      "logs": true
+     },
+     "event": "cloud.report"
+    },
+    {
+     "at": 1794825574590,
+     "data": {
+      "version": "1.4.6+10"
+     },
+     "event": "app.start"
+    },
+    {
+     "at": 1794825576727,
+     "data": {
+      "ok": true,
+      "logs": true
+     },
+     "event": "cloud.report"
+    },
+    {
+     "at": 1794827697993,
+     "data": {
+      "version": "1.4.6+10"
+     },
+     "event": "app.start"
+    },
+    {
+     "at": 1794827700552,
+     "data": {
+      "ok": true,
+      "logs": true
+     },
+     "event": "cloud.report"
+    },
+    {
+     "at": 1794885584929,
+     "data": {
+      "version": "1.4.6+10"
+     },
+     "event": "app.start"
+    },
+    {
+     "at": 1794885587829,
+     "data": {
+      "ok": true,
+      "logs": true
+     },
+     "event": "cloud.report"
+    },
+    {
+     "at": 1794890287932,
+     "data": {
+      "version": "1.4.6+10"
+     },
+     "event": "app.start"
+    },
+    {
+     "at": 1794890289638,
+     "data": {
+      "ok": true,
+      "logs": true
+     },
+     "event": "cloud.report"
+    },
+    {
+     "at": 1794896708819,
+     "data": {
+      "version": "1.4.6+10"
+     },
+     "event": "app.start"
+    },
+    {
+     "at": 1794896711926,
+     "data": {
+      "ok": true,
+      "logs": true
+     },
+     "event": "cloud.report"
+    },
+    {
+     "at": 1794898112687,
+     "data": {
+      "version": "1.4.6+10"
+     },
+     "event": "app.start"
+    },
+    {
+     "at": 1794898115753,
+     "data": {
+      "ok": true,
+      "logs": true
+     },
+     "event": "cloud.report"
+    },
+    {
+     "at": 1794907825075,
+     "data": {
+      "version": "1.4.6+10"
+     },
+     "event": "app.start"
+    },
+    {
+     "at": 1794907827471,
+     "data": {
+      "ok": true,
+      "logs": true
+     },
+     "event": "cloud.report"
+    },
+    {
+     "at": 1794995441739,
+     "data": {
+      "version": "1.4.6+10"
+     },
+     "event": "app.start"
+    }
+   ],
+   "updated_at": "2026-11-18T09:50:45.528458+00:00"
+  },
+  {
+   "device_id": "540c1815517c3a1f1b20513b32d7d866",
+   "app_version": "1.4.6",
+   "count": 8,
+   "entries": [
+    {
+     "at": 1794887992211,
+     "data": {
+      "version": "1.4.6+10"
+     },
+     "event": "app.start"
+    },
+    {
+     "at": 1794887995344,
+     "data": {
+      "ok": true,
+      "logs": true
+     },
+     "event": "cloud.report"
+    },
+    {
+     "at": 1794887997089,
+     "data": {
+      "count": 1
+     },
+     "event": "notice.shown"
+    },
+    {
+     "at": 1794908615758,
+     "data": {
+      "version": "1.4.6+10"
+     },
+     "event": "app.start"
+    },
+    {
+     "at": 1794908618014,
+     "data": {
+      "ok": true,
+      "logs": true
+     },
+     "event": "cloud.report"
+    },
+    {
+     "at": 1794909452777,
+     "data": {
+      "version": "1.4.6+10"
+     },
+     "event": "app.start"
+    },
+    {
+     "at": 1794909463258,
+     "data": {
+      "ok": true,
+      "logs": true
+     },
+     "event": "cloud.report"
+    },
+    {
+     "at": 1794989145667,
+     "data": {
+      "version": "1.4.6+10"
+     },
+     "event": "app.start"
+    }
+   ],
+   "updated_at": "2026-11-18T08:05:50.007805+00:00"
+  },
+  {
+   "device_id": "cb3d405ba49c35f3af5c96eb2867f3ee",
+   "app_version": "1.4.6",
+   "count": 29,
+   "entries": [
+    {
+     "at": 1794792051851,
+     "data": {
+      "version": "1.4.3+7"
+     },
+     "event": "app.start"
+    },
+    {
+     "at": 1794792054289,
+     "data": {
+      "ok": true,
+      "logs": true
+     },
+     "event": "cloud.report"
+    },
+    {
+     "at": 1794792056707,
+     "data": {
+      "count": 1
+     },
+     "event": "notice.shown"
+    },
+    {
+     "at": 1794792595685,
+     "data": {
+      "version": "1.4.4+8"
+     },
+     "event": "app.start"
+    },
+    {
+     "at": 1794792597748,
+     "data": {
+      "ok": true,
+      "logs": true
+     },
+     "event": "cloud.report"
+    },
+    {
+     "at": 1794792668645,
+     "data": {
+      "version": "1.4.4+8"
+     },
+     "event": "app.start"
+    },
+    {
+     "at": 1794792670458,
+     "data": {
+      "ok": true,
+      "logs": true
+     },
+     "event": "cloud.report"
+    },
+    {
+     "at": 1794793067807,
+     "data": {
+      "version": "1.4.4+8"
+     },
+     "event": "app.start"
+    },
+    {
+     "at": 1794793069566,
+     "data": {
+      "ok": true,
+      "logs": true
+     },
+     "event": "cloud.report"
+    },
+    {
+     "at": 1794793150515,
+     "data": {
+      "version": "1.4.4+8"
+     },
+     "event": "app.start"
+    },
+    {
+     "at": 1794793152235,
+     "data": {
+      "ok": true,
+      "logs": true
+     },
+     "event": "cloud.report"
+    },
+    {
+     "at": 1794793155487,
+     "data": {
+      "count": 1
+     },
+     "event": "notice.shown"
+    },
+    {
+     "at": 1794793192642,
+     "data": {
+      "version": "1.4.4+8"
+     },
+     "event": "app.start"
+    },
+    {
+     "at": 1794793194258,
+     "data": {
+      "ok": true,
+      "logs": true
+     },
+     "event": "cloud.report"
+    },
+    {
+     "at": 1794793212559,
+     "data": {
+      "version": "1.4.4+8"
+     },
+     "event": "app.start"
+    },
+    {
+     "at": 1794793214237,
+     "data": {
+      "ok": true,
+      "logs": true
+     },
+     "event": "cloud.report"
+    },
+    {
+     "at": 1794794100498,
+     "data": {
+      "version": "1.4.4+8"
+     },
+     "event": "app.start"
+    },
+    {
+     "at": 1794794102797,
+     "data": {
+      "ok": true,
+      "logs": true
+     },
+     "event": "cloud.report"
+    },
+    {
+     "at": 1794794138143,
+     "data": {
+      "version": "1.4.4+8"
+     },
+     "event": "app.start"
+    },
+    {
+     "at": 1794794139881,
+     "data": {
+      "ok": true,
+      "logs": true
+     },
+     "event": "cloud.report"
+    },
+    {
+     "at": 1794794273629,
+     "data": {
+      "version": "1.4.4+8"
+     },
+     "event": "app.start"
+    },
+    {
+     "at": 1794794275546,
+     "data": {
+      "ok": true,
+      "logs": true
+     },
+     "event": "cloud.report"
+    },
+    {
+     "at": 1794966879270,
+     "data": {
+      "version": "1.4.4+8"
+     },
+     "event": "app.start"
+    },
+    {
+     "at": 1794966884143,
+     "data": {
+      "count": 1
+     },
+     "event": "notice.shown"
+    },
+    {
+     "at": 1794966884975,
+     "data": {
+      "ok": true,
+      "logs": true
+     },
+     "event": "cloud.report"
+    },
+    {
+     "at": 1794967054572,
+     "data": {
+      "version": "1.4.6+10"
+     },
+     "event": "app.start"
+    },
+    {
+     "at": 1794967056693,
+     "data": {
+      "ok": true,
+      "logs": true
+     },
+     "event": "cloud.report"
+    },
+    {
+     "at": 1794967059662,
+     "data": {
+      "count": 1
+     },
+     "event": "notice.shown"
+    },
+    {
+     "at": 1794967300984,
+     "data": {
+      "version": "1.4.6+10"
+     },
+     "event": "app.start"
+    }
+   ],
+   "updated_at": "2026-11-18T02:01:43.000968+00:00"
+  },
   {
    "device_id": "a4ca21d95f29265b4ca4b7a1a4fc3fdf",
    "app_version": "1.4.3",
@@ -1224,222 +1693,6 @@
     }
    ],
    "updated_at": "2026-11-17T10:35:27.489504+00:00"
-  },
-  {
-   "device_id": "540c1815517c3a1f1b20513b32d7d866",
-   "app_version": "1.4.6",
-   "count": 6,
-   "entries": [
-    {
-     "at": 1794887992211,
-     "data": {
-      "version": "1.4.6+10"
-     },
-     "event": "app.start"
-    },
-    {
-     "at": 1794887995344,
-     "data": {
-      "ok": true,
-      "logs": true
-     },
-     "event": "cloud.report"
-    },
-    {
-     "at": 1794887997089,
-     "data": {
-      "count": 1
-     },
-     "event": "notice.shown"
-    },
-    {
-     "at": 1794908615758,
-     "data": {
-      "version": "1.4.6+10"
-     },
-     "event": "app.start"
-    },
-    {
-     "at": 1794908618014,
-     "data": {
-      "ok": true,
-      "logs": true
-     },
-     "event": "cloud.report"
-    },
-    {
-     "at": 1794909452777,
-     "data": {
-      "version": "1.4.6+10"
-     },
-     "event": "app.start"
-    }
-   ],
-   "updated_at": "2026-11-17T09:57:43.961545+00:00"
-  },
-  {
-   "device_id": "3557903183297f12629e43175521fb2a",
-   "app_version": "1.4.6",
-   "count": 21,
-   "entries": [
-    {
-     "at": 1794794395782,
-     "data": {
-      "version": "1.4.3+7"
-     },
-     "event": "app.start"
-    },
-    {
-     "at": 1794794397864,
-     "data": {
-      "ok": true,
-      "logs": true
-     },
-     "event": "cloud.report"
-    },
-    {
-     "at": 1794794400654,
-     "data": {
-      "count": 1
-     },
-     "event": "notice.shown"
-    },
-    {
-     "at": 1794823262857,
-     "data": {
-      "version": "1.4.3+7"
-     },
-     "event": "app.start"
-    },
-    {
-     "at": 1794823265446,
-     "data": {
-      "ok": true,
-      "logs": true
-     },
-     "event": "cloud.report"
-    },
-    {
-     "at": 1794823267961,
-     "data": {
-      "count": 1
-     },
-     "event": "notice.shown"
-    },
-    {
-     "at": 1794823319705,
-     "data": {
-      "version": "1.4.3+7"
-     },
-     "event": "app.start"
-    },
-    {
-     "at": 1794823322667,
-     "data": {
-      "ok": true,
-      "logs": true
-     },
-     "event": "cloud.report"
-    },
-    {
-     "at": 1794825574590,
-     "data": {
-      "version": "1.4.6+10"
-     },
-     "event": "app.start"
-    },
-    {
-     "at": 1794825576727,
-     "data": {
-      "ok": true,
-      "logs": true
-     },
-     "event": "cloud.report"
-    },
-    {
-     "at": 1794827697993,
-     "data": {
-      "version": "1.4.6+10"
-     },
-     "event": "app.start"
-    },
-    {
-     "at": 1794827700552,
-     "data": {
-      "ok": true,
-      "logs": true
-     },
-     "event": "cloud.report"
-    },
-    {
-     "at": 1794885584929,
-     "data": {
-      "version": "1.4.6+10"
-     },
-     "event": "app.start"
-    },
-    {
-     "at": 1794885587829,
-     "data": {
-      "ok": true,
-      "logs": true
-     },
-     "event": "cloud.report"
-    },
-    {
-     "at": 1794890287932,
-     "data": {
-      "version": "1.4.6+10"
-     },
-     "event": "app.start"
-    },
-    {
-     "at": 1794890289638,
-     "data": {
-      "ok": true,
-      "logs": true
-     },
-     "event": "cloud.report"
-    },
-    {
-     "at": 1794896708819,
-     "data": {
-      "version": "1.4.6+10"
-     },
-     "event": "app.start"
-    },
-    {
-     "at": 1794896711926,
-     "data": {
-      "ok": true,
-      "logs": true
-     },
-     "event": "cloud.report"
-    },
-    {
-     "at": 1794898112687,
-     "data": {
-      "version": "1.4.6+10"
-     },
-     "event": "app.start"
-    },
-    {
-     "at": 1794898115753,
-     "data": {
-      "ok": true,
-      "logs": true
-     },
-     "event": "cloud.report"
-    },
-    {
-     "at": 1794907825075,
-     "data": {
-      "version": "1.4.6+10"
-     },
-     "event": "app.start"
-    }
-   ],
-   "updated_at": "2026-11-17T09:30:28.018468+00:00"
   },
   {
    "device_id": "6065f1bbdba5ffa7ad759a0b100de5a4",
@@ -2698,170 +2951,6 @@
     }
    ],
    "updated_at": "2026-11-16T01:59:14.030767+00:00"
-  },
-  {
-   "device_id": "cb3d405ba49c35f3af5c96eb2867f3ee",
-   "app_version": "1.4.4",
-   "count": 21,
-   "entries": [
-    {
-     "at": 1794792051851,
-     "data": {
-      "version": "1.4.3+7"
-     },
-     "event": "app.start"
-    },
-    {
-     "at": 1794792054289,
-     "data": {
-      "ok": true,
-      "logs": true
-     },
-     "event": "cloud.report"
-    },
-    {
-     "at": 1794792056707,
-     "data": {
-      "count": 1
-     },
-     "event": "notice.shown"
-    },
-    {
-     "at": 1794792595685,
-     "data": {
-      "version": "1.4.4+8"
-     },
-     "event": "app.start"
-    },
-    {
-     "at": 1794792597748,
-     "data": {
-      "ok": true,
-      "logs": true
-     },
-     "event": "cloud.report"
-    },
-    {
-     "at": 1794792668645,
-     "data": {
-      "version": "1.4.4+8"
-     },
-     "event": "app.start"
-    },
-    {
-     "at": 1794792670458,
-     "data": {
-      "ok": true,
-      "logs": true
-     },
-     "event": "cloud.report"
-    },
-    {
-     "at": 1794793067807,
-     "data": {
-      "version": "1.4.4+8"
-     },
-     "event": "app.start"
-    },
-    {
-     "at": 1794793069566,
-     "data": {
-      "ok": true,
-      "logs": true
-     },
-     "event": "cloud.report"
-    },
-    {
-     "at": 1794793150515,
-     "data": {
-      "version": "1.4.4+8"
-     },
-     "event": "app.start"
-    },
-    {
-     "at": 1794793152235,
-     "data": {
-      "ok": true,
-      "logs": true
-     },
-     "event": "cloud.report"
-    },
-    {
-     "at": 1794793155487,
-     "data": {
-      "count": 1
-     },
-     "event": "notice.shown"
-    },
-    {
-     "at": 1794793192642,
-     "data": {
-      "version": "1.4.4+8"
-     },
-     "event": "app.start"
-    },
-    {
-     "at": 1794793194258,
-     "data": {
-      "ok": true,
-      "logs": true
-     },
-     "event": "cloud.report"
-    },
-    {
-     "at": 1794793212559,
-     "data": {
-      "version": "1.4.4+8"
-     },
-     "event": "app.start"
-    },
-    {
-     "at": 1794793214237,
-     "data": {
-      "ok": true,
-      "logs": true
-     },
-     "event": "cloud.report"
-    },
-    {
-     "at": 1794794100498,
-     "data": {
-      "version": "1.4.4+8"
-     },
-     "event": "app.start"
-    },
-    {
-     "at": 1794794102797,
-     "data": {
-      "ok": true,
-      "logs": true
-     },
-     "event": "cloud.report"
-    },
-    {
-     "at": 1794794138143,
-     "data": {
-      "version": "1.4.4+8"
-     },
-     "event": "app.start"
-    },
-    {
-     "at": 1794794139881,
-     "data": {
-      "ok": true,
-      "logs": true
-     },
-     "event": "cloud.report"
-    },
-    {
-     "at": 1794794273629,
-     "data": {
-      "version": "1.4.4+8"
-     },
-     "event": "app.start"
-    }
-   ],
-   "updated_at": "2026-11-16T01:57:55.550495+00:00"
   },
   {
    "device_id": "probe_insert_1",
