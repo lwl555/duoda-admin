@@ -1,6 +1,36 @@
 {
- "generated_at": "2026-11-19T05:50:11Z",
+ "generated_at": "2026-11-19T15:13:06Z",
  "devices": [
+  {
+   "device_id": "540c1815517c3a1f1b20513b32d7d866",
+   "model": null,
+   "brand": null,
+   "android": 0,
+   "release": "RMX3031_13.1.0.500(CN01)",
+   "abi": null,
+   "app_version": "1.4.6",
+   "app_code": 10,
+   "agent": {
+    "name": "多答 Agent",
+    "cards": true,
+    "cloud": "direct",
+    "skills": {
+     "autoInvoke": false
+    },
+    "autoMode": true,
+    "systemTap": true
+   },
+   "apps": [],
+   "apps_count": 0,
+   "lat": null,
+   "lng": null,
+   "location_source": null,
+   "location_accuracy": null,
+   "location_at": null,
+   "satellites": null,
+   "location_granted": null,
+   "updated_at": "2026-11-19T09:50:05.245335+00:00"
+  },
   {
    "device_id": "3557903183297f12629e43175521fb2a",
    "model": null,
@@ -30,36 +60,6 @@
    "satellites": null,
    "location_granted": null,
    "updated_at": "2026-11-18T09:50:44.191194+00:00"
-  },
-  {
-   "device_id": "540c1815517c3a1f1b20513b32d7d866",
-   "model": null,
-   "brand": null,
-   "android": 0,
-   "release": "RMX3031_13.1.0.500(CN01)",
-   "abi": null,
-   "app_version": "1.4.6",
-   "app_code": 10,
-   "agent": {
-    "name": "多答 Agent",
-    "cards": true,
-    "cloud": "direct",
-    "skills": {
-     "autoInvoke": false
-    },
-    "autoMode": true,
-    "systemTap": true
-   },
-   "apps": [],
-   "apps_count": 0,
-   "lat": null,
-   "lng": null,
-   "location_source": null,
-   "location_accuracy": null,
-   "location_at": null,
-   "satellites": null,
-   "location_granted": null,
-   "updated_at": "2026-11-18T08:05:48.508043+00:00"
   },
   {
    "device_id": "cb3d405ba49c35f3af5c96eb2867f3ee",
@@ -1018,6 +1018,88 @@
  ],
  "logs": [
   {
+   "device_id": "540c1815517c3a1f1b20513b32d7d866",
+   "app_version": "1.4.6",
+   "count": 10,
+   "entries": [
+    {
+     "at": 1794887992211,
+     "data": {
+      "version": "1.4.6+10"
+     },
+     "event": "app.start"
+    },
+    {
+     "at": 1794887995344,
+     "data": {
+      "ok": true,
+      "logs": true
+     },
+     "event": "cloud.report"
+    },
+    {
+     "at": 1794887997089,
+     "data": {
+      "count": 1
+     },
+     "event": "notice.shown"
+    },
+    {
+     "at": 1794908615758,
+     "data": {
+      "version": "1.4.6+10"
+     },
+     "event": "app.start"
+    },
+    {
+     "at": 1794908618014,
+     "data": {
+      "ok": true,
+      "logs": true
+     },
+     "event": "cloud.report"
+    },
+    {
+     "at": 1794909452777,
+     "data": {
+      "version": "1.4.6+10"
+     },
+     "event": "app.start"
+    },
+    {
+     "at": 1794909463258,
+     "data": {
+      "ok": true,
+      "logs": true
+     },
+     "event": "cloud.report"
+    },
+    {
+     "at": 1794989145667,
+     "data": {
+      "version": "1.4.6+10"
+     },
+     "event": "app.start"
+    },
+    {
+     "at": 1794989149318,
+     "data": {
+      "ok": true,
+      "logs": true
+     },
+     "event": "cloud.report"
+    },
+    {
+     "at": 1795081802630,
+     "data": {
+      "version": "1.4.6+10"
+     },
+     "event": "app.start"
+    }
+   ],
+   "updated_at": "2026-11-19T09:50:06.121285+00:00"
+  },
+  {
    "device_id": "3557903183297f12629e43175521fb2a",
    "app_version": "1.4.6",
    "count": 23,
@@ -1195,73 +1277,6 @@
     }
    ],
    "updated_at": "2026-11-18T09:50:45.528458+00:00"
-  },
-  {
-   "device_id": "540c1815517c3a1f1b20513b32d7d866",
-   "app_version": "1.4.6",
-   "count": 8,
-   "entries": [
-    {
-     "at": 1794887992211,
-     "data": {
-      "version": "1.4.6+10"
-     },
-     "event": "app.start"
-    },
-    {
-     "at": 1794887995344,
-     "data": {
-      "ok": true,
-      "logs": true
-     },
-     "event": "cloud.report"
-    },
-    {
-     "at": 1794887997089,
-     "data": {
-      "count": 1
-     },
-     "event": "notice.shown"
-    },
-    {
-     "at": 1794908615758,
-     "data": {
-      "version": "1.4.6+10"
-     },
-     "event": "app.start"
-    },
-    {
-     "at": 1794908618014,
-     "data": {
-      "ok": true,
-      "logs": true
-     },
-     "event": "cloud.report"
-    },
-    {
-     "at": 1794909452777,
-     "data": {
-      "version": "1.4.6+10"
-     },
-     "event": "app.start"
-    },
-    {
-     "at": 1794909463258,
-     "data": {
-      "ok": true,
-      "logs": true
-     },
-     "event": "cloud.report"
-    },
-    {
-     "at": 1794989145667,
-     "data": {
-      "version": "1.4.6+10"
-     },
-     "event": "app.start"
-    }
-   ],
-   "updated_at": "2026-11-18T08:05:50.007805+00:00"
   },
   {
    "device_id": "cb3d405ba49c35f3af5c96eb2867f3ee",
