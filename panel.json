@@ -1,6 +1,66 @@
 {
- "generated_at": "2026-11-20T00:17:09Z",
+ "generated_at": "2026-11-20T14:51:45Z",
  "devices": [
+  {
+   "device_id": "d88d983226ff1b4b76c355b1b07587b2",
+   "model": null,
+   "brand": null,
+   "android": 0,
+   "release": "PD2121_A_6.18.8",
+   "abi": null,
+   "app_version": "1.4.6",
+   "app_code": 10,
+   "agent": {
+    "name": "多答 Agent",
+    "cards": true,
+    "cloud": "direct",
+    "skills": {
+     "autoInvoke": false
+    },
+    "autoMode": true,
+    "systemTap": true
+   },
+   "apps": [],
+   "apps_count": 0,
+   "lat": null,
+   "lng": null,
+   "location_source": null,
+   "location_accuracy": null,
+   "location_at": null,
+   "satellites": null,
+   "location_granted": null,
+   "updated_at": "2026-11-20T08:38:25.06327+00:00"
+  },
+  {
+   "device_id": "8a1f67f2cb3ae45d78c971c437b4d62e",
+   "model": null,
+   "brand": null,
+   "android": 0,
+   "release": "PKG110_16.0.10.500(CN01)",
+   "abi": null,
+   "app_version": "1.4.6",
+   "app_code": 10,
+   "agent": {
+    "name": "多答 Agent",
+    "cards": true,
+    "cloud": "direct",
+    "skills": {
+     "autoInvoke": false
+    },
+    "autoMode": true,
+    "systemTap": true
+   },
+   "apps": [],
+   "apps_count": 0,
+   "lat": null,
+   "lng": null,
+   "location_source": null,
+   "location_accuracy": null,
+   "location_at": null,
+   "satellites": null,
+   "location_granted": null,
+   "updated_at": "2026-11-20T08:03:33.44866+00:00"
+  },
   {
    "device_id": "540c1815517c3a1f1b20513b32d7d866",
    "model": null,
@@ -150,36 +210,6 @@
    "satellites": null,
    "location_granted": null,
    "updated_at": "2026-11-17T13:32:40.263091+00:00"
-  },
-  {
-   "device_id": "d88d983226ff1b4b76c355b1b07587b2",
-   "model": null,
-   "brand": null,
-   "android": 0,
-   "release": "PD2121_A_6.18.8",
-   "abi": null,
-   "app_version": "1.4.6",
-   "app_code": 10,
-   "agent": {
-    "name": "多答 Agent",
-    "cards": true,
-    "cloud": "direct",
-    "skills": {
-     "autoInvoke": false
-    },
-    "autoMode": true,
-    "systemTap": true
-   },
-   "apps": [],
-   "apps_count": 0,
-   "lat": null,
-   "lng": null,
-   "location_source": null,
-   "location_accuracy": null,
-   "location_at": null,
-   "satellites": null,
-   "location_granted": null,
-   "updated_at": "2026-11-17T10:46:11.639737+00:00"
   },
   {
    "device_id": "83d9dc6973f94b96c15c15b0c8fc7589",
@@ -1017,6 +1047,679 @@
   }
  ],
  "logs": [
+  {
+   "device_id": "8a1f67f2cb3ae45d78c971c437b4d62e",
+   "app_version": "1.4.6",
+   "count": 89,
+   "entries": [
+    {
+     "at": 1794771581668,
+     "data": {
+      "version": "1.4.1+5"
+     },
+     "event": "app.start"
+    },
+    {
+     "at": 1794771582347,
+     "data": {
+      "error": "ClientException with SocketException: Connection reset by peer (OS Error: Connection reset by peer, errno = 104), address = wcnssyiqitugqfmcbdhe.supabase.co, port = 56436, uri=https://wcnssyiqitugqfmcbdhe.supabase.co/rest/v1/rpc/duoda_device_upsert",
+      "proxy": false
+     },
+     "event": "cloud.report.fail"
+    },
+    {
+     "at": 1794771643055,
+     "data": {
+      "version": "1.4.1+5"
+     },
+     "event": "app.start"
+    },
+    {
+     "at": 1794771643371,
+     "data": {
+      "error": "ClientException with SocketException: Connection reset by peer (OS Error: Connection reset by peer, errno = 104), address = wcnssyiqitugqfmcbdhe.supabase.co, port = 34624, uri=https://wcnssyiqitugqfmcbdhe.supabase.co/rest/v1/rpc/duoda_device_upsert",
+      "proxy": false
+     },
+     "event": "cloud.report.fail"
+    },
+    {
+     "at": 1794772055988,
+     "data": {
+      "version": "1.4.1+5"
+     },
+     "event": "app.start"
+    },
+    {
+     "at": 1794772056419,
+     "data": {
+      "error": "ClientException with SocketException: Connection reset by peer (OS Error: Connection reset by peer, errno = 104), address = wcnssyiqitugqfmcbdhe.supabase.co, port = 54812, uri=https://wcnssyiqitugqfmcbdhe.supabase.co/rest/v1/rpc/duoda_device_upsert",
+      "proxy": false
+     },
+     "event": "cloud.report.fail"
+    },
+    {
+     "at": 1794772211950,
+     "data": {
+      "version": "1.4.1+5"
+     },
+     "event": "app.start"
+    },
+    {
+     "at": 1794772212334,
+     "data": {
+      "error": "ClientException with SocketException: Connection reset by peer (OS Error: Connection reset by peer, errno = 104), address = wcnssyiqitugqfmcbdhe.supabase.co, port = 53294, uri=https://wcnssyiqitugqfmcbdhe.supabase.co/rest/v1/rpc/duoda_device_upsert",
+      "proxy": false
+     },
+     "event": "cloud.report.fail"
+    },
+    {
+     "at": 1794772327981,
+     "data": {
+      "version": "1.4.1+5"
+     },
+     "event": "app.start"
+    },
+    {
+     "at": 1794772328270,
+     "data": {
+      "error": "ClientException with SocketException: Connection reset by peer (OS Error: Connection reset by peer, errno = 104), address = wcnssyiqitugqfmcbdhe.supabase.co, port = 41628, uri=https://wcnssyiqitugqfmcbdhe.supabase.co/rest/v1/rpc/duoda_device_upsert",
+      "proxy": false
+     },
+     "event": "cloud.report.fail"
+    },
+    {
+     "at": 1794772452964,
+     "data": {
+      "version": "1.4.1+5"
+     },
+     "event": "app.start"
+    },
+    {
+     "at": 1794772453511,
+     "data": {
+      "error": "ClientException with SocketException: Connection reset by peer (OS Error: Connection reset by peer, errno = 104), address = wcnssyiqitugqfmcbdhe.supabase.co, port = 43614, uri=https://wcnssyiqitugqfmcbdhe.supabase.co/rest/v1/rpc/duoda_device_upsert",
+      "proxy": false
+     },
+     "event": "cloud.report.fail"
+    },
+    {
+     "at": 1794773698346,
+     "data": {
+      "version": "1.4.1+5"
+     },
+     "event": "app.start"
+    },
+    {
+     "at": 1794773699146,
+     "data": {
+      "error": "ClientException with SocketException: Connection reset by peer (OS Error: Connection reset by peer, errno = 104), address = wcnssyiqitugqfmcbdhe.supabase.co, port = 41136, uri=https://wcnssyiqitugqfmcbdhe.supabase.co/rest/v1/rpc/duoda_device_upsert",
+      "proxy": false
+     },
+     "event": "cloud.report.fail"
+    },
+    {
+     "at": 1794775915568,
+     "data": {
+      "version": "1.4.1+5"
+     },
+     "event": "app.start"
+    },
+    {
+     "at": 1794775916069,
+     "data": {
+      "error": "ClientException with SocketException: Connection reset by peer (OS Error: Connection reset by peer, errno = 104), address = wcnssyiqitugqfmcbdhe.supabase.co, port = 39400, uri=https://wcnssyiqitugqfmcbdhe.supabase.co/rest/v1/rpc/duoda_device_upsert",
+      "proxy": false
+     },
+     "event": "cloud.report.fail"
+    },
+    {
+     "at": 1794776057308,
+     "data": {
+      "version": "1.4.2+6"
+     },
+     "event": "app.start"
+    },
+    {
+     "at": 1794776057736,
+     "data": {
+      "error": "ClientException with SocketException: Connection reset by peer (OS Error: Connection reset by peer, errno = 104), address = wcnssyiqitugqfmcbdhe.supabase.co, port = 38590, uri=https://wcnssyiqitugqfmcbdhe.supabase.co/rest/v1/rpc/duoda_device_upsert",
+      "proxy": false
+     },
+     "event": "cloud.report.fail"
+    },
+    {
+     "at": 1794776062646,
+     "data": {
+      "count": 1
+     },
+     "event": "notice.shown"
+    },
+    {
+     "at": 1794777192533,
+     "data": {
+      "version": "1.4.2+6"
+     },
+     "event": "app.start"
+    },
+    {
+     "at": 1794777193021,
+     "data": {
+      "error": "ClientException with SocketException: Connection reset by peer (OS Error: Connection reset by peer, errno = 104), address = wcnssyiqitugqfmcbdhe.supabase.co, port = 44482, uri=https://wcnssyiqitugqfmcbdhe.supabase.co/rest/v1/rpc/duoda_device_upsert",
+      "proxy": false
+     },
+     "event": "cloud.report.fail"
+    },
+    {
+     "at": 1794789244982,
+     "data": {
+      "version": "1.4.3+7"
+     },
+     "event": "app.start"
+    },
+    {
+     "at": 1794789245482,
+     "data": {
+      "error": "ClientException with SocketException: Connection reset by peer (OS Error: Connection reset by peer, errno = 104), address = wcnssyiqitugqfmcbdhe.supabase.co, port = 33880, uri=https://wcnssyiqitugqfmcbdhe.supabase.co/rest/v1/rpc/duoda_device_upsert",
+      "proxy": false
+     },
+     "event": "cloud.report.fail"
+    },
+    {
+     "at": 1794789249892,
+     "data": {
+      "count": 1
+     },
+     "event": "notice.shown"
+    },
+    {
+     "at": 1794792757007,
+     "data": {
+      "version": "1.4.3+7"
+     },
+     "event": "app.start"
+    },
+    {
+     "at": 1794792757627,
+     "data": {
+      "error": "ClientException with SocketException: Connection reset by peer (OS Error: Connection reset by peer, errno = 104), address = wcnssyiqitugqfmcbdhe.supabase.co, port = 42508, uri=https://wcnssyiqitugqfmcbdhe.supabase.co/rest/v1/rpc/duoda_device_upsert",
+      "proxy": false
+     },
+     "event": "cloud.report.fail"
+    },
+    {
+     "at": 1794792762091,
+     "data": {
+      "count": 1
+     },
+     "event": "notice.shown"
+    },
+    {
+     "at": 1794792880312,
+     "data": {
+      "version": "1.4.3+7"
+     },
+     "event": "app.start"
+    },
+    {
+     "at": 1794792880745,
+     "data": {
+      "error": "ClientException with SocketException: Connection reset by peer (OS Error: Connection reset by peer, errno = 104), address = wcnssyiqitugqfmcbdhe.supabase.co, port = 51018, uri=https://wcnssyiqitugqfmcbdhe.supabase.co/rest/v1/rpc/duoda_device_upsert",
+      "proxy": false
+     },
+     "event": "cloud.report.fail"
+    },
+    {
+     "at": 1794793233008,
+     "data": {
+      "version": "1.4.3+7"
+     },
+     "event": "app.start"
+    },
+    {
+     "at": 1794793233648,
+     "data": {
+      "error": "ClientException with SocketException: Connection reset by peer (OS Error: Connection reset by peer, errno = 104), address = wcnssyiqitugqfmcbdhe.supabase.co, port = 51906, uri=https://wcnssyiqitugqfmcbdhe.supabase.co/rest/v1/rpc/duoda_device_upsert",
+      "proxy": false
+     },
+     "event": "cloud.report.fail"
+    },
+    {
+     "at": 1794793236852,
+     "data": {
+      "version": "1.4.3+7"
+     },
+     "event": "app.start"
+    },
+    {
+     "at": 1794793237166,
+     "data": {
+      "error": "ClientException with SocketException: Connection reset by peer (OS Error: Connection reset by peer, errno = 104), address = wcnssyiqitugqfmcbdhe.supabase.co, port = 41668, uri=https://wcnssyiqitugqfmcbdhe.supabase.co/rest/v1/rpc/duoda_device_upsert",
+      "proxy": false
+     },
+     "event": "cloud.report.fail"
+    },
+    {
+     "at": 1794793241943,
+     "data": {
+      "count": 1
+     },
+     "event": "notice.shown"
+    },
+    {
+     "at": 1794794102404,
+     "data": {
+      "version": "1.4.3+7"
+     },
+     "event": "app.start"
+    },
+    {
+     "at": 1794794102784,
+     "data": {
+      "error": "ClientException with SocketException: Connection reset by peer (OS Error: Connection reset by peer, errno = 104), address = wcnssyiqitugqfmcbdhe.supabase.co, port = 60236, uri=https://wcnssyiqitugqfmcbdhe.supabase.co/rest/v1/rpc/duoda_device_upsert",
+      "proxy": false
+     },
+     "event": "cloud.report.fail"
+    },
+    {
+     "at": 1794794278048,
+     "data": {
+      "version": "1.4.4+8"
+     },
+     "event": "app.start"
+    },
+    {
+     "at": 1794794278718,
+     "data": {
+      "error": "ClientException with SocketException: Connection reset by peer (OS Error: Connection reset by peer, errno = 104), address = wcnssyiqitugqfmcbdhe.supabase.co, port = 37466, uri=https://wcnssyiqitugqfmcbdhe.supabase.co/rest/v1/rpc/duoda_device_upsert",
+      "proxy": false
+     },
+     "event": "cloud.report.fail"
+    },
+    {
+     "at": 1794794590991,
+     "data": {
+      "error": "ClientException with SocketException: Connection reset by peer (OS Error: Connection reset by peer, errno = 104), address = wcnssyiqitugqfmcbdhe.supabase.co, port = 50224, uri=https://wcnssyiqitugqfmcbdhe.supabase.co/rest/v1/rpc/duoda_device_upsert",
+      "proxy": false
+     },
+     "event": "cloud.report.fail"
+    },
+    {
+     "at": 1794795249748,
+     "data": {
+      "version": "1.4.4+8"
+     },
+     "event": "app.start"
+    },
+    {
+     "at": 1794795250345,
+     "data": {
+      "error": "ClientException with SocketException: Connection reset by peer (OS Error: Connection reset by peer, errno = 104), address = wcnssyiqitugqfmcbdhe.supabase.co, port = 37018, uri=https://wcnssyiqitugqfmcbdhe.supabase.co/rest/v1/rpc/duoda_device_upsert",
+      "proxy": false
+     },
+     "event": "cloud.report.fail"
+    },
+    {
+     "at": 1794795254366,
+     "data": {
+      "count": 1
+     },
+     "event": "notice.shown"
+    },
+    {
+     "at": 1794795306788,
+     "data": {
+      "version": "1.4.4+8"
+     },
+     "event": "app.start"
+    },
+    {
+     "at": 1794795307240,
+     "data": {
+      "error": "ClientException with SocketException: Connection reset by peer (OS Error: Connection reset by peer, errno = 104), address = wcnssyiqitugqfmcbdhe.supabase.co, port = 56650, uri=https://wcnssyiqitugqfmcbdhe.supabase.co/rest/v1/rpc/duoda_device_upsert",
+      "proxy": false
+     },
+     "event": "cloud.report.fail"
+    },
+    {
+     "at": 1794795958716,
+     "data": {
+      "version": "1.4.4+8"
+     },
+     "event": "app.start"
+    },
+    {
+     "at": 1794795959510,
+     "data": {
+      "error": "ClientException with SocketException: Connection reset by peer (OS Error: Connection reset by peer, errno = 104), address = wcnssyiqitugqfmcbdhe.supabase.co, port = 43324, uri=https://wcnssyiqitugqfmcbdhe.supabase.co/rest/v1/rpc/duoda_device_upsert",
+      "proxy": false
+     },
+     "event": "cloud.report.fail"
+    },
+    {
+     "at": 1794796604226,
+     "data": {
+      "version": "1.4.4+8"
+     },
+     "event": "app.start"
+    },
+    {
+     "at": 1794796604726,
+     "data": {
+      "error": "ClientException with SocketException: Connection reset by peer (OS Error: Connection reset by peer, errno = 104), address = wcnssyiqitugqfmcbdhe.supabase.co, port = 46172, uri=https://wcnssyiqitugqfmcbdhe.supabase.co/rest/v1/rpc/duoda_device_upsert",
+      "proxy": false
+     },
+     "event": "cloud.report.fail"
+    },
+    {
+     "at": 1794796907201,
+     "data": {
+      "version": "1.4.4+8"
+     },
+     "event": "app.start"
+    },
+    {
+     "at": 1794796908004,
+     "data": {
+      "error": "ClientException with SocketException: Connection reset by peer (OS Error: Connection reset by peer, errno = 104), address = wcnssyiqitugqfmcbdhe.supabase.co, port = 54838, uri=https://wcnssyiqitugqfmcbdhe.supabase.co/rest/v1/rpc/duoda_device_upsert",
+      "proxy": false
+     },
+     "event": "cloud.report.fail"
+    },
+    {
+     "at": 1794797130867,
+     "data": {
+      "version": "1.4.4+8"
+     },
+     "event": "app.start"
+    },
+    {
+     "at": 1794797131366,
+     "data": {
+      "error": "ClientException with SocketException: Connection reset by peer (OS Error: Connection reset by peer, errno = 104), address = wcnssyiqitugqfmcbdhe.supabase.co, port = 46504, uri=https://wcnssyiqitugqfmcbdhe.supabase.co/rest/v1/rpc/duoda_device_upsert",
+      "proxy": false
+     },
+     "event": "cloud.report.fail"
+    },
+    {
+     "at": 1794797292613,
+     "data": {
+      "version": "1.4.4+8"
+     },
+     "event": "app.start"
+    },
+    {
+     "at": 1794797293298,
+     "data": {
+      "error": "ClientException with SocketException: Connection reset by peer (OS Error: Connection reset by peer, errno = 104), address = wcnssyiqitugqfmcbdhe.supabase.co, port = 37376, uri=https://wcnssyiqitugqfmcbdhe.supabase.co/rest/v1/rpc/duoda_device_upsert",
+      "proxy": false
+     },
+     "event": "cloud.report.fail"
+    },
+    {
+     "at": 1794797538763,
+     "data": {
+      "version": "1.4.5+9"
+     },
+     "event": "app.start"
+    },
+    {
+     "at": 1794797539191,
+     "data": {
+      "error": "ClientException with SocketException: Connection reset by peer (OS Error: Connection reset by peer, errno = 104), address = wcnssyiqitugqfmcbdhe.supabase.co, port = 52662, uri=https://wcnssyiqitugqfmcbdhe.supabase.co/rest/v1/rpc/duoda_device_upsert",
+      "proxy": false
+     },
+     "event": "cloud.report.fail"
+    },
+    {
+     "at": 1794798530080,
+     "data": {
+      "version": "1.4.5+9"
+     },
+     "event": "app.start"
+    },
+    {
+     "at": 1794798530777,
+     "data": {
+      "error": "ClientException with SocketException: Connection reset by peer (OS Error: Connection reset by peer, errno = 104), address = wcnssyiqitugqfmcbdhe.supabase.co, port = 43264, uri=https://wcnssyiqitugqfmcbdhe.supabase.co/rest/v1/rpc/duoda_device_upsert",
+      "proxy": false
+     },
+     "event": "cloud.report.fail"
+    },
+    {
+     "at": 1794799064478,
+     "data": {
+      "version": "1.4.5+9"
+     },
+     "event": "app.start"
+    },
+    {
+     "at": 1794799065008,
+     "data": {
+      "error": "ClientException with SocketException: Connection reset by peer (OS Error: Connection reset by peer, errno = 104), address = wcnssyiqitugqfmcbdhe.supabase.co, port = 56312, uri=https://wcnssyiqitugqfmcbdhe.supabase.co/rest/v1/rpc/duoda_device_upsert",
+      "proxy": false
+     },
+     "event": "cloud.report.fail"
+    },
+    {
+     "at": 1794809664360,
+     "data": {
+      "version": "1.4.5+9"
+     },
+     "event": "app.start"
+    },
+    {
+     "at": 1794809665369,
+     "data": {
+      "error": "ClientException with SocketException: Connection reset by peer (OS Error: Connection reset by peer, errno = 104), address = wcnssyiqitugqfmcbdhe.supabase.co, port = 58008, uri=https://wcnssyiqitugqfmcbdhe.supabase.co/rest/v1/rpc/duoda_device_upsert",
+      "proxy": false
+     },
+     "event": "cloud.report.fail"
+    },
+    {
+     "at": 1794817848933,
+     "data": {
+      "version": "1.4.5+9"
+     },
+     "event": "app.start"
+    },
+    {
+     "at": 1794817849481,
+     "data": {
+      "error": "ClientException with SocketException: Connection reset by peer (OS Error: Connection reset by peer, errno = 104), address = wcnssyiqitugqfmcbdhe.supabase.co, port = 56242, uri=https://wcnssyiqitugqfmcbdhe.supabase.co/rest/v1/rpc/duoda_device_upsert",
+      "proxy": false
+     },
+     "event": "cloud.report.fail"
+    },
+    {
+     "at": 1794822669598,
+     "data": {
+      "version": "1.4.5+9"
+     },
+     "event": "app.start"
+    },
+    {
+     "at": 1794822670285,
+     "data": {
+      "error": "ClientException with SocketException: Connection reset by peer (OS Error: Connection reset by peer, errno = 104), address = wcnssyiqitugqfmcbdhe.supabase.co, port = 34306, uri=https://wcnssyiqitugqfmcbdhe.supabase.co/rest/v1/rpc/duoda_device_upsert",
+      "proxy": false
+     },
+     "event": "cloud.report.fail"
+    },
+    {
+     "at": 1794822821856,
+     "data": {
+      "version": "1.4.6+10"
+     },
+     "event": "app.start"
+    },
+    {
+     "at": 1794822822261,
+     "data": {
+      "error": "ClientException with SocketException: Connection reset by peer (OS Error: Connection reset by peer, errno = 104), address = wcnssyiqitugqfmcbdhe.supabase.co, port = 47024, uri=https://wcnssyiqitugqfmcbdhe.supabase.co/rest/v1/rpc/duoda_device_upsert",
+      "proxy": false
+     },
+     "event": "cloud.report.fail"
+    },
+    {
+     "at": 1794824359182,
+     "data": {
+      "version": "1.4.6+10"
+     },
+     "event": "app.start"
+    },
+    {
+     "at": 1794824360992,
+     "data": {
+      "error": "ClientException with SocketException: Connection reset by peer (OS Error: Connection reset by peer, errno = 104), address = wcnssyiqitugqfmcbdhe.supabase.co, port = 43518, uri=https://wcnssyiqitugqfmcbdhe.supabase.co/rest/v1/rpc/duoda_device_upsert",
+      "proxy": false
+     },
+     "event": "cloud.report.fail"
+    },
+    {
+     "at": 1794826161725,
+     "data": {
+      "version": "1.4.6+10"
+     },
+     "event": "app.start"
+    },
+    {
+     "at": 1794826163544,
+     "data": {
+      "error": "ClientException with SocketException: Connection reset by peer (OS Error: Connection reset by peer, errno = 104), address = wcnssyiqitugqfmcbdhe.supabase.co, port = 40302, uri=https://wcnssyiqitugqfmcbdhe.supabase.co/rest/v1/rpc/duoda_device_upsert",
+      "proxy": false
+     },
+     "event": "cloud.report.fail"
+    },
+    {
+     "at": 1794826635958,
+     "data": {
+      "version": "1.4.6+10"
+     },
+     "event": "app.start"
+    },
+    {
+     "at": 1794826636398,
+     "data": {
+      "error": "ClientException with SocketException: Connection reset by peer (OS Error: Connection reset by peer, errno = 104), address = wcnssyiqitugqfmcbdhe.supabase.co, port = 36202, uri=https://wcnssyiqitugqfmcbdhe.supabase.co/rest/v1/rpc/duoda_device_upsert",
+      "proxy": false
+     },
+     "event": "cloud.report.fail"
+    },
+    {
+     "at": 1794827738642,
+     "data": {
+      "version": "1.4.6+10"
+     },
+     "event": "app.start"
+    },
+    {
+     "at": 1794827739195,
+     "data": {
+      "error": "ClientException with SocketException: Connection reset by peer (OS Error: Connection reset by peer, errno = 104), address = wcnssyiqitugqfmcbdhe.supabase.co, port = 34518, uri=https://wcnssyiqitugqfmcbdhe.supabase.co/rest/v1/rpc/duoda_device_upsert",
+      "proxy": false
+     },
+     "event": "cloud.report.fail"
+    },
+    {
+     "at": 1794830463190,
+     "data": {
+      "version": "1.4.6+10"
+     },
+     "event": "app.start"
+    },
+    {
+     "at": 1794830463977,
+     "data": {
+      "error": "ClientException with SocketException: Connection reset by peer (OS Error: Connection reset by peer, errno = 104), address = wcnssyiqitugqfmcbdhe.supabase.co, port = 52500, uri=https://wcnssyiqitugqfmcbdhe.supabase.co/rest/v1/rpc/duoda_device_upsert",
+      "proxy": false
+     },
+     "event": "cloud.report.fail"
+    },
+    {
+     "at": 1794832550286,
+     "data": {
+      "version": "1.4.6+10"
+     },
+     "event": "app.start"
+    },
+    {
+     "at": 1794832550671,
+     "data": {
+      "error": "ClientException with SocketException: Connection reset by peer (OS Error: Connection reset by peer, errno = 104), address = wcnssyiqitugqfmcbdhe.supabase.co, port = 51848, uri=https://wcnssyiqitugqfmcbdhe.supabase.co/rest/v1/rpc/duoda_device_upsert",
+      "proxy": false
+     },
+     "event": "cloud.report.fail"
+    },
+    {
+     "at": 1794991403719,
+     "data": {
+      "version": "1.4.6+10"
+     },
+     "event": "app.start"
+    },
+    {
+     "at": 1794991404526,
+     "data": {
+      "error": "ClientException with SocketException: Connection reset by peer (OS Error: Connection reset by peer, errno = 104), address = wcnssyiqitugqfmcbdhe.supabase.co, port = 40556, uri=https://wcnssyiqitugqfmcbdhe.supabase.co/rest/v1/rpc/duoda_device_upsert",
+      "proxy": false
+     },
+     "event": "cloud.report.fail"
+    },
+    {
+     "at": 1794992630607,
+     "data": {
+      "version": "1.4.6+10"
+     },
+     "event": "app.start"
+    },
+    {
+     "at": 1794992631158,
+     "data": {
+      "error": "ClientException with SocketException: Connection reset by peer (OS Error: Connection reset by peer, errno = 104), address = wcnssyiqitugqfmcbdhe.supabase.co, port = 36578, uri=https://wcnssyiqitugqfmcbdhe.supabase.co/rest/v1/rpc/duoda_device_upsert",
+      "proxy": false
+     },
+     "event": "cloud.report.fail"
+    },
+    {
+     "at": 1795160677387,
+     "data": {
+      "version": "1.4.6+10"
+     },
+     "event": "app.start"
+    },
+    {
+     "at": 1795160679939,
+     "data": {
+      "ok": true,
+      "logs": true
+     },
+     "event": "cloud.report"
+    },
+    {
+     "at": 1795160958073,
+     "data": {
+      "version": "1.4.6+10"
+     },
+     "event": "app.start"
+    },
+    {
+     "at": 1795160960277,
+     "data": {
+      "ok": true,
+      "logs": true
+     },
+     "event": "cloud.report"
+    },
+    {
+     "at": 1795161811556,
+     "data": {
+      "version": "1.4.6+10"
+     },
+     "event": "app.start"
+    }
+   ],
+   "updated_at": "2026-11-20T08:03:43.429077+00:00"
+  },
   {
    "device_id": "540c1815517c3a1f1b20513b32d7d866",
    "app_version": "1.4.6",
