@@ -1,5 +1,5 @@
 {
- "generated_at": "2026-11-22T04:58:10Z",
+ "generated_at": "2026-11-22T13:59:58Z",
  "devices": [
   {
    "device_id": "8a1f67f2cb3ae45d78c971c437b4d62e",
@@ -29,7 +29,7 @@
    "location_at": null,
    "satellites": null,
    "location_granted": null,
-   "updated_at": "2026-11-22T02:45:56.312542+00:00"
+   "updated_at": "2026-11-22T13:06:24.412183+00:00"
   },
   {
    "device_id": "d88d983226ff1b4b76c355b1b07587b2",
@@ -1050,7 +1050,7 @@
   {
    "device_id": "8a1f67f2cb3ae45d78c971c437b4d62e",
    "app_version": "1.4.6",
-   "count": 91,
+   "count": 93,
    "entries": [
     {
      "at": 1794771581668,
@@ -1731,9 +1731,24 @@
       "version": "1.4.6+10"
      },
      "event": "app.start"
+    },
+    {
+     "at": 1795315557163,
+     "data": {
+      "ok": true,
+      "logs": true
+     },
+     "event": "cloud.report"
+    },
+    {
+     "at": 1795352782671,
+     "data": {
+      "version": "1.4.6+10"
+     },
+     "event": "app.start"
     }
    ],
-   "updated_at": "2026-11-22T02:45:57.196403+00:00"
+   "updated_at": "2026-11-22T13:06:25.307985+00:00"
   },
   {
    "device_id": "540c1815517c3a1f1b20513b32d7d866",
