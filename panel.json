@@ -1,5 +1,5 @@
 {
- "generated_at": "2026-11-23T05:40:30Z",
+ "generated_at": "2026-11-23T17:20:29Z",
  "devices": [
   {
    "device_id": "8a1f67f2cb3ae45d78c971c437b4d62e",
@@ -29,7 +29,37 @@
    "location_at": null,
    "satellites": null,
    "location_granted": null,
-   "updated_at": "2026-11-23T05:24:38.744797+00:00"
+   "updated_at": "2026-11-23T16:55:54.072904+00:00"
+  },
+  {
+   "device_id": "38e38ce1b23b5ec6f692c793ec6a4366",
+   "model": null,
+   "brand": null,
+   "android": 0,
+   "release": "PD2283B_A_15.2.13.0.W10",
+   "abi": null,
+   "app_version": "1.4.6",
+   "app_code": 10,
+   "agent": {
+    "name": "多答 Agent",
+    "cards": true,
+    "cloud": "direct",
+    "skills": {
+     "autoInvoke": false
+    },
+    "autoMode": true,
+    "systemTap": true
+   },
+   "apps": [],
+   "apps_count": 0,
+   "lat": null,
+   "lng": null,
+   "location_source": null,
+   "location_accuracy": null,
+   "location_at": null,
+   "satellites": null,
+   "location_granted": null,
+   "updated_at": "2026-11-23T11:17:56.726142+00:00"
   },
   {
    "device_id": "d88d983226ff1b4b76c355b1b07587b2",
@@ -1050,15 +1080,8 @@
   {
    "device_id": "8a1f67f2cb3ae45d78c971c437b4d62e",
    "app_version": "1.4.6",
-   "count": 97,
+   "count": 100,
    "entries": [
-    {
-     "at": 1794771581668,
-     "data": {
-      "version": "1.4.1+5"
-     },
-     "event": "app.start"
-    },
     {
      "at": 1794771582347,
      "data": {
@@ -1776,9 +1799,39 @@
       "version": "1.4.6+10"
      },
      "event": "app.start"
+    },
+    {
+     "at": 1795411480920,
+     "data": {
+      "ok": true,
+      "logs": true
+     },
+     "event": "cloud.report"
+    },
+    {
+     "at": 1795452211848,
+     "data": {
+      "version": "1.4.6+10"
+     },
+     "event": "app.start"
+    },
+    {
+     "at": 1795452214608,
+     "data": {
+      "ok": true,
+      "logs": true
+     },
+     "event": "cloud.report"
+    },
+    {
+     "at": 1795452952642,
+     "data": {
+      "version": "1.4.6+10"
+     },
+     "event": "app.start"
     }
    ],
-   "updated_at": "2026-11-23T05:24:40.42925+00:00"
+   "updated_at": "2026-11-23T16:55:55.089637+00:00"
   },
   {
    "device_id": "540c1815517c3a1f1b20513b32d7d866",
