@@ -1,6 +1,36 @@
 {
- "generated_at": "2026-11-25T01:53:48Z",
+ "generated_at": "2026-11-25T16:45:28Z",
  "devices": [
+  {
+   "device_id": "f2e9bdeb5c0b5aa99f69873661f2b05d",
+   "model": null,
+   "brand": null,
+   "android": 0,
+   "release": "PACM00_11_F.27",
+   "abi": null,
+   "app_version": "1.4.6",
+   "app_code": 10,
+   "agent": {
+    "name": "多答 Agent",
+    "cards": true,
+    "cloud": "direct",
+    "skills": {
+     "autoInvoke": false
+    },
+    "autoMode": true,
+    "systemTap": true
+   },
+   "apps": [],
+   "apps_count": 0,
+   "lat": null,
+   "lng": null,
+   "location_source": null,
+   "location_accuracy": null,
+   "location_at": null,
+   "satellites": null,
+   "location_granted": null,
+   "updated_at": "2026-11-25T05:31:16.973258+00:00"
+  },
   {
    "device_id": "2316acea3822e632956435786e033453",
    "model": null,
@@ -1107,6 +1137,58 @@
   }
  ],
  "logs": [
+  {
+   "device_id": "f2e9bdeb5c0b5aa99f69873661f2b05d",
+   "app_version": "1.4.6",
+   "count": 6,
+   "entries": [
+    {
+     "at": 1794797107685,
+     "data": {
+      "version": "1.4.3+7"
+     },
+     "event": "app.start"
+    },
+    {
+     "at": 1794797108008,
+     "data": {
+      "error": "ClientException with SocketException: Connection reset by peer (OS Error: Connection reset by peer, errno = 104), address = wcnssyiqitugqfmcbdhe.supabase.co, port = 47942, uri=https://wcnssyiqitugqfmcbdhe.supabase.co/rest/v1/rpc/duoda_device_upsert",
+      "proxy": false
+     },
+     "event": "cloud.report.fail"
+    },
+    {
+     "at": 1794797112156,
+     "data": {
+      "count": 1
+     },
+     "event": "notice.shown"
+    },
+    {
+     "at": 1794797962544,
+     "data": {
+      "version": "1.4.6+10"
+     },
+     "event": "app.start"
+    },
+    {
+     "at": 1794797963933,
+     "data": {
+      "error": "ClientException with SocketException: Connection reset by peer (OS Error: Connection reset by peer, errno = 104), address = wcnssyiqitugqfmcbdhe.supabase.co, port = 48316, uri=https://wcnssyiqitugqfmcbdhe.supabase.co/rest/v1/rpc/duoda_device_upsert",
+      "proxy": false
+     },
+     "event": "cloud.report.fail"
+    },
+    {
+     "at": 1795584671969,
+     "data": {
+      "version": "1.4.6+10"
+     },
+     "event": "app.start"
+    }
+   ],
+   "updated_at": "2026-11-25T05:31:21.541977+00:00"
+  },
   {
    "device_id": "2316acea3822e632956435786e033453",
    "app_version": "1.4.4",
