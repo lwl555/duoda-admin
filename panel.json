@@ -1,6 +1,36 @@
 {
- "generated_at": "2026-11-27T01:28:17Z",
+ "generated_at": "2026-11-27T16:05:58Z",
  "devices": [
+  {
+   "device_id": "2316acea3822e632956435786e033453",
+   "model": null,
+   "brand": null,
+   "android": 0,
+   "release": "PD2121_A_6.18.8",
+   "abi": null,
+   "app_version": "1.4.4",
+   "app_code": 8,
+   "agent": {
+    "name": "多答 Agent",
+    "cards": true,
+    "cloud": "direct",
+    "skills": {
+     "autoInvoke": false
+    },
+    "autoMode": true,
+    "systemTap": true
+   },
+   "apps": [],
+   "apps_count": 0,
+   "lat": null,
+   "lng": null,
+   "location_source": null,
+   "location_accuracy": null,
+   "location_at": null,
+   "satellites": null,
+   "location_granted": null,
+   "updated_at": "2026-11-27T09:41:40.230726+00:00"
+  },
   {
    "device_id": "55abe49309f3d55a414cb5bdb672f010",
    "model": null,
@@ -90,36 +120,6 @@
    "satellites": null,
    "location_granted": null,
    "updated_at": "2026-11-25T05:31:16.973258+00:00"
-  },
-  {
-   "device_id": "2316acea3822e632956435786e033453",
-   "model": null,
-   "brand": null,
-   "android": 0,
-   "release": "PD2121_A_6.18.8",
-   "abi": null,
-   "app_version": "1.4.4",
-   "app_code": 8,
-   "agent": {
-    "name": "多答 Agent",
-    "cards": true,
-    "cloud": "direct",
-    "skills": {
-     "autoInvoke": false
-    },
-    "autoMode": true,
-    "systemTap": true
-   },
-   "apps": [],
-   "apps_count": 0,
-   "lat": null,
-   "lng": null,
-   "location_source": null,
-   "location_accuracy": null,
-   "location_at": null,
-   "satellites": null,
-   "location_granted": null,
-   "updated_at": "2026-11-24T07:04:56.40112+00:00"
   },
   {
    "device_id": "8a1f67f2cb3ae45d78c971c437b4d62e",
@@ -1168,6 +1168,80 @@
  ],
  "logs": [
   {
+   "device_id": "2316acea3822e632956435786e033453",
+   "app_version": "1.4.4",
+   "count": 9,
+   "entries": [
+    {
+     "at": 1794792035930,
+     "data": {
+      "version": "1.4.3+7"
+     },
+     "event": "app.start"
+    },
+    {
+     "at": 1794792036232,
+     "data": {
+      "error": "ClientException with SocketException: Connection reset by peer (OS Error: Connection reset by peer, errno = 104), address = wcnssyiqitugqfmcbdhe.supabase.co, port = 49094, uri=https://wcnssyiqitugqfmcbdhe.supabase.co/rest/v1/rpc/duoda_device_upsert",
+      "proxy": false
+     },
+     "event": "cloud.report.fail"
+    },
+    {
+     "at": 1794792040471,
+     "data": {
+      "count": 1
+     },
+     "event": "notice.shown"
+    },
+    {
+     "at": 1794792675124,
+     "data": {
+      "version": "1.4.4+8"
+     },
+     "event": "app.start"
+    },
+    {
+     "at": 1794792675487,
+     "data": {
+      "error": "ClientException with SocketException: Connection reset by peer (OS Error: Connection reset by peer, errno = 104), address = wcnssyiqitugqfmcbdhe.supabase.co, port = 49536, uri=https://wcnssyiqitugqfmcbdhe.supabase.co/rest/v1/rpc/duoda_device_upsert",
+      "proxy": false
+     },
+     "event": "cloud.report.fail"
+    },
+    {
+     "at": 1795503892825,
+     "data": {
+      "version": "1.4.4+8"
+     },
+     "event": "app.start"
+    },
+    {
+     "at": 1795503897950,
+     "data": {
+      "ok": true,
+      "logs": true
+     },
+     "event": "cloud.report"
+    },
+    {
+     "at": 1795503900154,
+     "data": {
+      "count": 1
+     },
+     "event": "notice.shown"
+    },
+    {
+     "at": 1795772497857,
+     "data": {
+      "version": "1.4.4+8"
+     },
+     "event": "app.start"
+    }
+   ],
+   "updated_at": "2026-11-27T09:41:43.474086+00:00"
+  },
+  {
    "device_id": "55abe49309f3d55a414cb5bdb672f010",
    "app_version": "1.4.6",
    "count": 10,
@@ -1300,58 +1374,6 @@
     }
    ],
    "updated_at": "2026-11-25T05:31:21.541977+00:00"
-  },
-  {
-   "device_id": "2316acea3822e632956435786e033453",
-   "app_version": "1.4.4",
-   "count": 6,
-   "entries": [
-    {
-     "at": 1794792035930,
-     "data": {
-      "version": "1.4.3+7"
-     },
-     "event": "app.start"
-    },
-    {
-     "at": 1794792036232,
-     "data": {
-      "error": "ClientException with SocketException: Connection reset by peer (OS Error: Connection reset by peer, errno = 104), address = wcnssyiqitugqfmcbdhe.supabase.co, port = 49094, uri=https://wcnssyiqitugqfmcbdhe.supabase.co/rest/v1/rpc/duoda_device_upsert",
-      "proxy": false
-     },
-     "event": "cloud.report.fail"
-    },
-    {
-     "at": 1794792040471,
-     "data": {
-      "count": 1
-     },
-     "event": "notice.shown"
-    },
-    {
-     "at": 1794792675124,
-     "data": {
-      "version": "1.4.4+8"
-     },
-     "event": "app.start"
-    },
-    {
-     "at": 1794792675487,
-     "data": {
-      "error": "ClientException with SocketException: Connection reset by peer (OS Error: Connection reset by peer, errno = 104), address = wcnssyiqitugqfmcbdhe.supabase.co, port = 49536, uri=https://wcnssyiqitugqfmcbdhe.supabase.co/rest/v1/rpc/duoda_device_upsert",
-      "proxy": false
-     },
-     "event": "cloud.report.fail"
-    },
-    {
-     "at": 1795503892825,
-     "data": {
-      "version": "1.4.4+8"
-     },
-     "event": "app.start"
-    }
-   ],
-   "updated_at": "2026-11-24T07:04:57.638871+00:00"
   },
   {
    "device_id": "8a1f67f2cb3ae45d78c971c437b4d62e",
